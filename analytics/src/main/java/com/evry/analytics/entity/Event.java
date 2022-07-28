@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "event")
+@Table(name = "Event")
 public class Event {
     @Override
     public String toString() {
@@ -25,7 +25,7 @@ public class Event {
                 "id=" + eventId +
                 ", eventType='" + eventType + '\'' +
                 ", metadata='" + metadata + '\'' +
-                ", timestamp=" + timestamp +
+                ", timestamp=" + eventDate +
                 ", userId=" + userId +
                 '}';
     }
@@ -43,9 +43,8 @@ public class Event {
     @Transient
     private String metadata;
 
-    @NotNull
     @Transient
-    private Date timestamp;
+    private Date eventDate;
 
     @NotNull
     @Transient

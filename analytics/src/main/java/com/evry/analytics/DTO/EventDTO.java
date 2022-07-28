@@ -18,7 +18,7 @@ public class EventDTO {
         this.eventId = event.getEventId();
         this.eventType = event.getEventType();
         this.metadata = event.getMetadata();
-        this.timestamp = event.getTimestamp();
+        this.eventDate = event.getEventDate();
         this.userId = event.getUserId();
     }
 
@@ -28,7 +28,7 @@ public class EventDTO {
                 "id=" + eventId +
                 ", eventType='" + eventType + '\'' +
                 ", metadata='" + metadata + '\'' +
-                ", timestamp=" + timestamp +
+                ", timestamp=" + eventDate +
                 ", userId=" + userId +
                 '}';
     }
@@ -36,6 +36,6 @@ public class EventDTO {
     private Long eventId;
     private String eventType;
     private String metadata;
-    private Date timestamp;
+    private Date eventDate;
     private Long userId;
 }

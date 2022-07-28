@@ -12,7 +12,7 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findEventsByUserId(long userId);
 
-    List<Event> findEventsByTimestampBetweenAndUserId(Date date1,
+    List<Event> findEventsByEventDateBetweenAndUserId(Date date1,
                                                       Date date2,
                                                       Long userId);
 }

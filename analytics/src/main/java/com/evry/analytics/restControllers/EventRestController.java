@@ -41,6 +41,10 @@ public class EventRestController {
 
     @PostMapping("/register")
     public EventDTO registerEvent(@RequestBody EventDTO eventDTO) {
+        if (eventDTO.getEventDate() == null) {
+            eventDTO.setEventDate(new Date());
+        }
+
         return new EventDTO(_eventModel.addEvent(eventDTO));
     }
 
