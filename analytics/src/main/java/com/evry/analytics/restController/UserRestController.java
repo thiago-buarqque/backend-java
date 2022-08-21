@@ -1,4 +1,4 @@
-package com.evry.analytics.restControllers;
+package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.model.UserModel;

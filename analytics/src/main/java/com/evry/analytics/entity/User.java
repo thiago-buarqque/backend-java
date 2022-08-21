@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Entity;
@@ -12,10 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "User")
+@Table
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

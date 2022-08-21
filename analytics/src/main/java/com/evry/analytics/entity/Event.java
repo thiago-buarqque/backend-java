@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Entity;
@@ -14,10 +15,10 @@ import javax.persistence.Table;
 
 import java.util.Date;
 
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "Event")
+@Table
 public class Event {
     @Override
     public String toString() {
@@ -29,6 +30,9 @@ public class Event {
                 ", userId=" + userId +
                 '}';
     }
+
+    @Transient
+    private Date eventDate;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -43,10 +47,6 @@ public class Event {
     @Transient
     private String metadata;
 
-    @Transient
-    private Date eventDate;
-
-    @NotNull
     @Transient
     private Long userId;
 }

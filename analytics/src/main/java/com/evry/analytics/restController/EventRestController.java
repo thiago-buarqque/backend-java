@@ -1,4 +1,4 @@
-package com.evry.analytics.restControllers;
+package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.EventDTO;
 import com.evry.analytics.entity.Event;
@@ -7,7 +7,13 @@ import com.evry.analytics.model.EventModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
@@ -23,14 +29,16 @@ public class EventRestController {
     }
 
     @GetMapping("/{userId}/all")
-    public List<EventDTO> fetchAllUserEvents(@PathVariable String userId,
-                                          @RequestParam(value = "dateEnd", required = false) Date dateEnd,
-                                          @RequestParam(value = "dateStart", required = false) Date dateStart) {
+    public List<EventDTO> fetchAllUserEvents(
+            @PathVariable String userId, @RequestParam(value = "dateEnd",
+            required = false) Date dateEnd, @RequestParam(value = "dateStart",
+            required = false) Date dateStart) {
+
         List<Event> events;
 
         if (dateStart != null && dateEnd != null) {
-            events = _eventModel.getUserEvents(
-                                dateStart, dateEnd, Long.parseLong(userId));
+            events = _eventModel.getUserEvents(dateStart, dateEnd,
+                    Long.parseLong(userId));
         }
         else {
             events = _eventModel.getAllUserEvents(Long.parseLong(userId));
@@ -45,7 +53,8 @@ public class EventRestController {
             eventDTO.setEventDate(new Date());
         }
 
-        return new EventDTO(_eventModel.addEvent(eventDTO));
+        return _objectMapper.convertValue(_eventModel.addEvent(eventDTO),
+                EventDTO.class);
     }
 
     @Autowired
