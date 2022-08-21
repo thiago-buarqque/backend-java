@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -20,6 +21,26 @@ public class EventDTO {
         this.metadata = event.getMetadata();
         this.eventDate = event.getEventDate();
         this.userId = event.getUserId();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+
+        if (object == null || getClass() != object.getClass()) return false;
+
+        EventDTO eventDTO = (EventDTO) object;
+
+        return Objects.equals(eventId, eventDTO.eventId) &&
+               Objects.equals(eventType, eventDTO.eventType) &&
+               Objects.equals(metadata, eventDTO.metadata) &&
+               Objects.equals(eventDate, eventDTO.eventDate) &&
+               Objects.equals(userId, eventDTO.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId, eventType, metadata, eventDate, userId);
     }
 
     @Override

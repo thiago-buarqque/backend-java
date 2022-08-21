@@ -1,6 +1,7 @@
 package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.EventDTO;
+import com.evry.analytics.common.DateUtils;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.model.EventModel;
 
@@ -23,12 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 public class EventRestController {
 
-    @GetMapping("/count")
-    public long count() {
-        return _eventModel.getTotalEvents();
-    }
-
-    @GetMapping("/{userId}/all")
+    @GetMapping("/{userId}")
     public List<EventDTO> fetchAllUserEvents(
             @PathVariable String userId, @RequestParam(value = "dateEnd",
             required = false) Date dateEnd, @RequestParam(value = "dateStart",
@@ -36,13 +32,14 @@ public class EventRestController {
 
         List<Event> events;
 
-        if (dateStart != null && dateEnd != null) {
-            events = _eventModel.getUserEvents(dateStart, dateEnd,
-                    Long.parseLong(userId));
+        if (dateStart == null || dateEnd == null) {
+            dateStart = DateUtils.addHours(new Date(), -24);
+
+            dateEnd = new Date();
         }
-        else {
-            events = _eventModel.getAllUserEvents(Long.parseLong(userId));
-        }
+
+        events = _eventModel.getUserEvents(dateStart, dateEnd,
+                Long.parseLong(userId));
 
         return events.stream().map(EventDTO::new).collect(Collectors.toList());
     }
@@ -53,7 +50,9 @@ public class EventRestController {
             eventDTO.setEventDate(new Date());
         }
 
-        return _objectMapper.convertValue(_eventModel.addEvent(eventDTO),
+        return _objectMapper.convertValue(
+                _eventModel.addEvent(
+                        _objectMapper.convertValue(eventDTO, Event.class)),
                 EventDTO.class);
     }
 

@@ -4,6 +4,8 @@ import com.evry.analytics.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class UserDTO {
@@ -17,7 +19,31 @@ public class UserDTO {
         this.name = user.getName();
     }
 
-    private long userId;
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
 
+        if (object == null || getClass() != object.getClass()) return false;
+
+        UserDTO user = (UserDTO) object;
+
+        return Objects.equals(userId, user.userId) &&
+                Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, name);
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    private long userId;
     private String name;
 }

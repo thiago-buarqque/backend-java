@@ -14,12 +14,34 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @Table
 public class Event {
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+
+        if (object == null || getClass() != object.getClass()) return false;
+
+        Event event = (Event) object;
+
+        return Objects.equals(eventId, event.eventId) &&
+                Objects.equals(eventType, event.eventType) &&
+                Objects.equals(metadata, event.metadata) &&
+                Objects.equals(eventDate, event.eventDate) &&
+                Objects.equals(userId, event.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId, eventType, metadata, eventDate, userId);
+    }
+
     @Override
     public String toString() {
         return "Event{" +
