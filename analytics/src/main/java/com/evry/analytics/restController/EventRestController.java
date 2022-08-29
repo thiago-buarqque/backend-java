@@ -33,10 +33,15 @@ public class EventRestController extends DefaultController {
 
         List<Event> events;
 
-        if (dateStart == null || dateEnd == null) {
+        if (dateStart == null && dateEnd == null) {
             dateStart = DateUtils.addHours(new Date(), -24);
-
             dateEnd = new Date();
+        }
+        else if (dateStart == null) {
+            dateStart = DateUtils.addHours(dateEnd, -24);
+        }
+        else if (dateEnd == null) {
+            dateEnd = DateUtils.addHours(dateStart, 24);
         }
 
         events = _eventModel.getUserEvents(dateStart, dateEnd,
