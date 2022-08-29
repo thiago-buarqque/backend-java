@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
@@ -50,7 +51,7 @@ public class User {
     @Transient
     private Long userId;
 
-    @NotNull
+    @NotBlank(message = "User name can not be empty.")
     @Transient
     private String name;
 }

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import java.util.Date;
 import java.util.Objects;
@@ -61,14 +62,15 @@ public class Event {
     @Transient
     private Long eventId;
 
-    @NotNull
+    @NotEmpty(message = "Invalid event type.")
     @Transient
     private String eventType;
 
-    @NotNull
+    @NotEmpty(message = "Metadata can not be empty.")
     @Transient
     private String metadata;
 
+    @NotNull
     @Transient
     private Long userId;
 }

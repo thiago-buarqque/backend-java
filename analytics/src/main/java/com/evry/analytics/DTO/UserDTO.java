@@ -4,6 +4,7 @@ import com.evry.analytics.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Getter
@@ -45,5 +46,7 @@ public class UserDTO {
     }
 
     private long userId;
+
+    @NotBlank(message = "User name can not be empty.")
     private String name;
 }

@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RequestMapping("/user")
 @RestController
-public class UserRestController {
+public class UserRestController extends DefaultController {
     @PostMapping("/register")
-    public UserDTO registerUser(@RequestBody UserDTO userDTO) {
-        return new UserDTO(_userModel.addUser(
-                _objectMapper.convertValue(userDTO, User.class)));
+    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(new UserDTO(_userModel.addUser(
+                _objectMapper.convertValue(userDTO, User.class))));
     }
 
     @PostMapping("/{userId}/delete")

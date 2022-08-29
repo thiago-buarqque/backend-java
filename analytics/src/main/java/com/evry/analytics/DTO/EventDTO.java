@@ -2,9 +2,11 @@ package com.evry.analytics.DTO;
 
 import com.evry.analytics.entity.Event;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Objects;
 
@@ -55,8 +57,15 @@ public class EventDTO {
     }
 
     private Long eventId;
+
+    @NotEmpty(message = "Invalid event type.")
     private String eventType;
+
+    @NotEmpty(message = "Metadata can not be empty.")
     private String metadata;
+
     private Date eventDate;
+
+    @NotNull
     private Long userId;
 }

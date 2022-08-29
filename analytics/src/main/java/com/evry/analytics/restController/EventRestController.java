@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/event")
 @RestController
-public class EventRestController {
+public class EventRestController extends DefaultController {
 
     @GetMapping("/{userId}")
     public List<EventDTO> fetchAllUserEvents(
@@ -45,7 +46,7 @@ public class EventRestController {
     }
 
     @PostMapping("/register")
-    public EventDTO registerEvent(@RequestBody EventDTO eventDTO) {
+    public EventDTO registerEvent(@Valid @RequestBody EventDTO eventDTO) {
         if (eventDTO.getEventDate() == null) {
             eventDTO.setEventDate(new Date());
         }
