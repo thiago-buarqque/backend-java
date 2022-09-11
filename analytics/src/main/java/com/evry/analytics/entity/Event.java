@@ -5,7 +5,6 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,23 +53,18 @@ public class Event {
                 '}';
     }
 
-    @Transient
     private Date eventDate;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Transient
     private Long eventId;
 
     @NotEmpty(message = "Invalid event type.")
-    @Transient
     private String eventType;
 
     @NotEmpty(message = "Metadata can not be empty.")
-    @Transient
     private String metadata;
 
     @NotNull
-    @Transient
     private Long userId;
 }

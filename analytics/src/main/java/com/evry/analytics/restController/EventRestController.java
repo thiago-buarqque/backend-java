@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RequestMapping("/event")
 @RestController
-public class EventRestController extends DefaultController {
+public class EventRestController extends BaseRestController {
 
     @GetMapping("/{userId}")
     public List<EventDTO> fetchAllUserEvents(

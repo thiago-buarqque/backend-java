@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @RequestMapping("/user")
 @RestController
-public class UserRestController extends DefaultController {
+public class UserRestController extends BaseRestController {
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(new UserDTO(_userModel.addUser(
