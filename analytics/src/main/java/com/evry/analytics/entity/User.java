@@ -46,6 +46,5 @@ public class User {
     @Id
     private Long userId;
 
-    @NotBlank(message = "User name can not be empty.")
     private String name;
 }

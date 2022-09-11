@@ -27,5 +27,5 @@ public class EventRepositoryImpl implements CustomEventRepository {
         deleteUsingStep.where(condition).executeAsync();
     }
 
-    private DSLContext _dslContext;
+    private final DSLContext _dslContext;
 }

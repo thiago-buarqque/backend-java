@@ -56,6 +56,9 @@ public class EventDTO {
                 '}';
     }
 
+    @NotEmpty(message = "Event date must be defined.")
+    private Date eventDate;
+
     private Long eventId;
 
     @NotEmpty(message = "Invalid event type.")
@@ -63,8 +66,6 @@ public class EventDTO {
 
     @NotEmpty(message = "Metadata can not be empty.")
     private String metadata;
-
-    private Date eventDate;
 
     @NotNull
     private Long userId;

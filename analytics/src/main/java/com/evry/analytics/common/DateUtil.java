@@ -9,13 +9,14 @@ package com.evry.analytics.common;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtils {
+public class DateUtil {
+
     public static Date addHours(Date date, int hours) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
 
-        c.add(Calendar.HOUR, hours);
+        calendar.add(Calendar.HOUR, hours);
 
-        return c.getTime();
+        return calendar.getTime();
     }
 }

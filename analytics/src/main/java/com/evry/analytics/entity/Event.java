@@ -59,12 +59,9 @@ public class Event {
     @Id
     private Long eventId;
 
-    @NotEmpty(message = "Invalid event type.")
     private String eventType;
 
-    @NotEmpty(message = "Metadata can not be empty.")
     private String metadata;
 
-    @NotNull
     private Long userId;
 }

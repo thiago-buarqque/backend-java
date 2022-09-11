@@ -1,7 +1,7 @@
 package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.EventDTO;
-import com.evry.analytics.common.DateUtils;
+import com.evry.analytics.common.DateUtil;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.model.EventModel;
 
@@ -31,20 +31,18 @@ public class EventRestController extends BaseRestController {
             required = false) Date dateEnd, @RequestParam(value = "dateStart",
             required = false) Date dateStart) {
 
-        List<Event> events;
-
         if (dateStart == null && dateEnd == null) {
-            dateStart = DateUtils.addHours(new Date(), -24);
+            dateStart = DateUtil.addHours(new Date(), -24);
             dateEnd = new Date();
         }
         else if (dateStart == null) {
-            dateStart = DateUtils.addHours(dateEnd, -24);
+            dateStart = DateUtil.addHours(dateEnd, -24);
         }
         else if (dateEnd == null) {
-            dateEnd = DateUtils.addHours(dateStart, 24);
+            dateEnd = DateUtil.addHours(dateStart, 24);
         }
 
-        events = _eventModel.getUserEvents(dateStart, dateEnd,
+        List<Event> events = _eventModel.getUserEvents(dateStart, dateEnd,
                 Long.parseLong(userId));
 
         return events.stream().map(EventDTO::new).collect(Collectors.toList());
