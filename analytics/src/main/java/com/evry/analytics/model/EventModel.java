@@ -18,7 +18,7 @@ public class EventModel {
 
     public List<Event> getUserEvents(TimeRange timeRange, Long userid) {
         return _eventRepository.findEventsByEventDateBetweenAndUserId(
-                timeRange.getDateEnd(), timeRange.getDateStart(), userid);
+                timeRange.getDateStart(), timeRange.getDateEnd(), userid);
     }
 
     @Autowired

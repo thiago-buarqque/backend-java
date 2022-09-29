@@ -13,5 +13,5 @@ public interface EventRepository extends CustomEventRepository,
         JpaRepository<Event, Long> {
 
     List<Event> findEventsByEventDateBetweenAndUserId(
-            Date endDate, Date startDate, Long userId);
+            Date date1, Date date2, Long userId);
 }
