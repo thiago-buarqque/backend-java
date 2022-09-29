@@ -1,12 +1,13 @@
 package com.evry.analytics.model;
 
+import com.evry.analytics.common.TimeRange;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -15,9 +16,9 @@ public class EventModel {
         return _eventRepository.save(event);
     }
 
-    public List<Event> getUserEvents(Date date1, Date date2, Long userid) {
-        return _eventRepository.findEventsByEventDateBetweenAndUserId(date1,
-                date2, userid);
+    public List<Event> getUserEvents(TimeRange timeRange, Long userid) {
+        return _eventRepository.findEventsByEventDateBetweenAndUserId(
+                timeRange.getDateEnd(), timeRange.getDateStart(), userid);
     }
 
     @Autowired

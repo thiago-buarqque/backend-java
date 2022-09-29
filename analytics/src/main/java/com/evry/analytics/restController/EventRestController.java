@@ -1,7 +1,7 @@
 package com.evry.analytics.restController;
 
+import com.evry.analytics.common.TimeRange;
 import com.evry.analytics.DTO.EventDTO;
-import com.evry.analytics.common.DateUtil;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.model.EventModel;
 
@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 @RequestMapping("/event")
 @RestController
@@ -31,19 +32,9 @@ public class EventRestController extends BaseRestController {
             required = false) Date dateEnd, @RequestParam(value = "dateStart",
             required = false) Date dateStart) {
 
-        if (dateStart == null && dateEnd == null) {
-            dateStart = DateUtil.addHours(new Date(), -24);
-            dateEnd = new Date();
-        }
-        else if (dateStart == null) {
-            dateStart = DateUtil.addHours(dateEnd, -24);
-        }
-        else if (dateEnd == null) {
-            dateEnd = DateUtil.addHours(dateStart, 24);
-        }
-
-        List<Event> events = _eventModel.getUserEvents(dateStart, dateEnd,
-                Long.parseLong(userId));
+        List<Event> events = _eventModel.getUserEvents(
+                new TimeRange(dateEnd, dateStart), Long.parseLong(userId)
+        );
 
         return events.stream().map(EventDTO::new).collect(Collectors.toList());
     }
