@@ -3,6 +3,7 @@ package com.evry.analytics.model;
 import com.evry.analytics.entity.User;
 import com.evry.analytics.repository.EventRepository;
 import com.evry.analytics.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
