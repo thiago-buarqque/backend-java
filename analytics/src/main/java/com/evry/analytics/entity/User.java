@@ -29,19 +29,6 @@ public class User {
                Objects.equals(name, user.name);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, name);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long userId;

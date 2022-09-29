@@ -32,19 +32,6 @@ public class UserDTO {
                 Objects.equals(name, user.name);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, name);
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     private long userId;
 
     @NotBlank(message = "User name can not be empty.")

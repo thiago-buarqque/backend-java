@@ -37,22 +37,6 @@ public class Event {
                 Objects.equals(userId, event.userId);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(eventId, eventType, metadata, eventDate, userId);
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + eventId +
-                ", eventType='" + eventType + '\'' +
-                ", metadata='" + metadata + '\'' +
-                ", timestamp=" + eventDate +
-                ", userId=" + userId +
-                '}';
-    }
-
     private Date eventDate;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

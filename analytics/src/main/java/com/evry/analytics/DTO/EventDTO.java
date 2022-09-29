@@ -40,22 +40,6 @@ public class EventDTO {
                Objects.equals(userId, eventDTO.userId);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(eventId, eventType, metadata, eventDate, userId);
-    }
-
-    @Override
-    public String toString() {
-        return "EventDTO{" +
-                "id=" + eventId +
-                ", eventType='" + eventType + '\'' +
-                ", metadata='" + metadata + '\'' +
-                ", timestamp=" + eventDate +
-                ", userId=" + userId +
-                '}';
-    }
-
     @NotEmpty(message = "Event date must be defined.")
     private Date eventDate;
 
