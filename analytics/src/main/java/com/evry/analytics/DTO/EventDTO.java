@@ -40,7 +40,9 @@ public class EventDTO {
                Objects.equals(userId, eventDTO.userId);
     }
 
-    @NotEmpty(message = "Event date must be defined.")
+    @javax.validation.constraints.NotNull(
+            message = "Event date must be defined."
+    )
     private Date eventDate;
 
     private Long eventId;
