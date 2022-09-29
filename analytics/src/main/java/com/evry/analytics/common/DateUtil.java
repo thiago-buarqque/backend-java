@@ -1,9 +1,3 @@
-/*
- * Thiago buarque projects
- *
- * Github: https://github.com/thiago-buarqque
- */
-
 package com.evry.analytics.common;
 
 import java.util.Calendar;

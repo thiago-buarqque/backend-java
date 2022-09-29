@@ -1,9 +1,3 @@
-/*
- * Thiago buarque projects
- *
- * Github: https://github.com/thiago-buarqque
- */
-
 package com.evry.analytics.restController;
 
 import org.springframework.http.HttpStatus;
