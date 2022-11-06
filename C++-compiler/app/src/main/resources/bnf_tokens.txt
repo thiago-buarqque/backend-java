@@ -1,0 +1,92 @@
+<array_naming> ::= <identifier> <squared_bracket_open> <arithmetic_expression> <squared_bracket_close>
+<arithmetic_operator> ::= <plus> | <minus> | <mult> | <div> | <modulo>
+
+<arithmetic_expression> ::= <arithmetic_expression_with_parenthesis> | <arithmetic_expression_group1>
+<arithmetic_expression_group1> ::= <arithmetic_expression_group2> <arithmetic_expression_repeat1>
+<arithmetic_expression_group2> ::= <var_reference> | <int_number>
+<arithmetic_expression_repeat1> ::= {<arithmetic_expression_operation>}
+<arithmetic_expression_operation> ::= <arithmetic_operator> <arithmetic_expression>
+<arithmetic_expression_with_parenthesis> ::= <parenthesis_open> <arithmetic_expression> <parenthesis_close> <arithmetic_expression_repeat1>
+
+<block> ::= <curly_bracket_open> <block_repeat1> <curly_bracket_close>
+<block_repeat1> ::= {<statement>}
+
+<condition> ::= <expression> <logical_operator> <expression> <condition_repeat1>
+<condition_repeat1> ::= {<conditional_operator> <condition>}
+<conditional_operator> ::= <and> | <or>
+
+<else_statement> ::= <else> <else_group1>
+<else_group1> ::= <if_else> | <block>
+
+<expression> ::= <string_expression_value> <expression_repeat1>
+<expression_repeat1> ::= {<plus> <string_expression_value>}
+
+<for_condition> ::= <condition> <semicolon>
+<for_statement> ::= <for> <parenthesis_open> <for_var_declaration> <for_condition> <for_var_attribution> <parenthesis_close> <block>
+<for_var_attribution> ::= <var_attribution> | <var_increment_decrement>
+<for_var_declaration> ::= <for_var_declaration_group1>
+<for_var_declaration_group1> ::= <int_var_declaration> | <var_attribution>
+
+<if_else> ::= <if> <parenthesis_open> <condition> <parenthesis_close> <block> <if_else_optional1>
+<if_else_optional1> ::= [<else_statement>]
+
+<inline_var_declaration> ::= <comma> <var_declaration_naming>
+<input> ::= <cin> <greater_than> <greater_than> <identifier> <semicolon>
+
+<int_declaration> ::= <int_var_declaration> | <int_array>
+<int_array> ::= <int> <array_naming> <int_array_optional1> <semicolon>
+<int_array_optional1> ::= [<equals_symbol> <int_array_values_declaration>]
+
+<int_array_value> ::= <int_number> <int_array_value_repeat1>
+<int_array_value_repeat1> ::= {<comma> <int_number>}
+<int_array_values_declaration> ::= <curly_bracket_open> <int_array_values_declaration_optional1> <curly_bracket_close>
+<int_array_values_declaration_optional1> ::= [<int_array_value>]
+
+<logical_operator> ::= <equals> | <difference> | <greater_than> | <less_than> | <greater_than_equals> | <less_than_equals>
+<logical_statement> ::= <true> | <false>
+
+<main_block> ::= <curly_bracket_open> <main_block_repeat1> <return> <main_block_group1> <semicolon> <curly_bracket_close>
+<main_block_repeat1> ::= {<statement>}
+<main_block_group1> ::= <int_number> | <identifier>
+<opposite_signs> ::= <plus> | <minus>
+<output> ::= <cout> <less_than> <less_than> <expression> <output_repeat1> <semicolon>
+<output_repeat1> ::= {<less_than> <less_than> <expression>}
+<program> ::= <int> <main> <parenthesis_open> <parenthesis_close> <main_block>
+<statement> ::= <string_var_declaration> | <int_declaration> | <var_attribution> | <if_else> | <while_statement> | <for_statement> | <output> | <input> | <string_array>
+
+<string_array> ::= <std> <colon> <colon> <string> <array_naming> <string_array_optional1> <semicolon>
+<string_array_optional1> ::= [<equals_symbol> <string_array_values_declaration>]
+
+<string_array_value> ::= <string_array_value_repeat1> <string_array_value_repeat2>
+<string_array_value_repeat1> ::= {<string_content>}
+<string_array_value_repeat2> ::= {<comma> <string_array_value>}
+
+<string_array_values_declaration> ::= <curly_bracket_open> <string_array_values_declaration_optional1> <curly_bracket_close>
+<string_array_values_declaration_optional1> ::= [<string_array_value>]
+<string_expression_value> ::= <string_content> | <arithmetic_expression>
+
+<var_attribution> ::= <var_attribution_group1> <var_attribution_optional1> <equals_symbol> <expression> <semicolon>
+<var_attribution_group1> ::=  <array_naming> | <identifier>
+<var_attribution_optional1> ::= [<arithmetic_operator>]
+
+<string_var_declaration> ::= <string> <var_declaration_naming> <var_declaration_repeat1> <semicolon>
+<int_var_declaration> ::= <int> <int_var_declaration_naming> <var_declaration_repeat1> <semicolon>
+<var_declaration_repeat1> ::= {<inline_var_declaration>}
+
+<int_var_declaration_attribution> ::= <equals_symbol> <arithmetic_expression>
+<int_var_declaration_naming> ::= <identifier> <int_var_declaration_naming_optional1>
+<int_var_declaration_naming_optional1> ::= [<int_var_declaration_attribution>]
+
+<var_declaration_attribution> ::= <equals_symbol> <expression>
+<var_declaration_naming> ::= <identifier> <var_declaration_naming_optional1>
+<var_declaration_naming_optional1> ::= [<var_declaration_attribution>]
+
+<var_increment_decrement> ::= <identifier> <var_increment_decrement_group1>
+<var_increment_decrement_group1> ::= <var_increment_decrement_group2> | <var_increment_decrement_group3>
+<var_increment_decrement_group2> ::= <plus> <plus>
+<var_increment_decrement_group3> ::= <minus> <minus>
+
+<var_reference> ::= <identifier> <var_reference_optional1>
+<var_reference_optional1> ::= [<dot> <length>]
+
+<while_statement> ::= <while> <parenthesis_open> <condition> <parenthesis_close> <block>
