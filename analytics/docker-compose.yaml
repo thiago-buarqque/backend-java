@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0.31
+    container_name: analytics_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/opt/evry/data
+
+volumes:
+  db:
+    driver: local
