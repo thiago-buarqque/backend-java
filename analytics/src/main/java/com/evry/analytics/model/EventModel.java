@@ -1,4 +1,4 @@
-package com.evry.analytics.service;
+package com.evry.analytics.model;
 
 import com.evry.analytics.common.TimeRange;
 import com.evry.analytics.entity.Event;
@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class EventService {
+public class EventModel {
+
     public Event addEvent(Event event) {
         return _eventRepository.save(event);
     }
@@ -23,4 +24,5 @@ public class EventService {
 
     @Autowired
     private EventRepository _eventRepository;
+
 }

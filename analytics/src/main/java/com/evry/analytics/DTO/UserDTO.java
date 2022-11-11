@@ -12,7 +12,6 @@ import java.util.Objects;
 public class UserDTO {
 
     public UserDTO() {
-
     }
 
     public UserDTO(User user) {
@@ -36,4 +35,5 @@ public class UserDTO {
 
     @NotBlank(message = "User name can not be empty.")
     private String name;
+
 }

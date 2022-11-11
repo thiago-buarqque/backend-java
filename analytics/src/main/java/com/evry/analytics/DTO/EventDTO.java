@@ -13,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class EventDTO {
+
     public EventDTO() {
 
     }
@@ -55,4 +56,5 @@ public class EventDTO {
 
     @NotNull
     private Long userId;
+
 }

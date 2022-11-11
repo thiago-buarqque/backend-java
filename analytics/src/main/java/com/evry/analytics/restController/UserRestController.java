@@ -2,7 +2,7 @@ package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.entity.User;
-import com.evry.analytics.service.UserService;
+import com.evry.analytics.model.UserModel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +25,7 @@ public class UserRestController extends BaseRestController {
     public ResponseEntity<UserDTO>
         registerUser(@Valid @RequestBody UserDTO userDTO) {
 
-        return ResponseEntity.ok(new UserDTO(_userService.addUser(
+        return ResponseEntity.ok(new UserDTO(_userModel.addUser(
                 _objectMapper.convertValue(userDTO, User.class)))
         );
     }
@@ -33,7 +33,7 @@ public class UserRestController extends BaseRestController {
     @PostMapping("/{userId}/delete")
     public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
         try{
-            _userService.deleteUser(userId);
+            _userModel.deleteUser(userId);
 
             return new ResponseEntity<>("User removed successfully.",
                     HttpStatus.OK);
@@ -46,7 +46,7 @@ public class UserRestController extends BaseRestController {
     }
 
     @Autowired
-    UserService _userService;
+    UserModel _userModel;
 
     @Autowired
     ObjectMapper _objectMapper;

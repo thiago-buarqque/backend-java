@@ -3,7 +3,7 @@ package com.evry.analytics.restController;
 import com.evry.analytics.common.TimeRange;
 import com.evry.analytics.DTO.EventDTO;
 import com.evry.analytics.entity.Event;
-import com.evry.analytics.service.EventService;
+import com.evry.analytics.model.EventModel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,7 +32,7 @@ public class EventRestController extends BaseRestController {
             required = false) Date dateEnd, @RequestParam(value = "dateStart",
             required = false) Date dateStart) {
 
-        List<Event> events = _eventService.getUserEvents(
+        List<Event> events = _eventModel.getUserEvents(
                 new TimeRange(dateEnd, dateStart), Long.parseLong(userId)
         );
 
@@ -46,14 +46,15 @@ public class EventRestController extends BaseRestController {
         }
 
         return _objectMapper.convertValue(
-                _eventService.addEvent(
+                _eventModel.addEvent(
                         _objectMapper.convertValue(eventDTO, Event.class)),
                 EventDTO.class);
     }
 
     @Autowired
-    private EventService _eventService;
+    private EventModel _eventModel;
 
     @Autowired
     private ObjectMapper _objectMapper;
+
 }

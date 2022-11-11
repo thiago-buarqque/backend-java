@@ -2,7 +2,6 @@ package com.evry.analytics.repository.impl;
 
 import com.evry.analytics.repository.CustomEventRepository;
 
-import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.DeleteUsingStep;
 import org.jooq.Record;
@@ -22,10 +21,11 @@ public class EventRepositoryImpl implements CustomEventRepository {
         DeleteUsingStep<Record> deleteUsingStep = _dslContext.deleteFrom(
                 DSL.table("Event"));
 
-        Condition condition = DSL.condition("userId=" + userId);
-
-        deleteUsingStep.where(condition).executeAsync();
+        deleteUsingStep.where(
+            DSL.field("userId", Long.class).eq(userId)
+        ).executeAsync();
     }
 
     private final DSLContext _dslContext;
+
 }
