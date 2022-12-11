@@ -1,5 +1,7 @@
 package com.evry.analytics.DTO;
 
+import com.evry.analytics.annotations.JSONField;
+import com.evry.analytics.annotations.JSONSerializable;
 import com.evry.analytics.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@JSONSerializable
 public class UserDTO {
 
     public UserDTO() {
@@ -31,9 +34,11 @@ public class UserDTO {
                 Objects.equals(name, user.name);
     }
 
+    @JSONField
     private long userId;
 
     @NotBlank(message = "User name can not be empty.")
+    @JSONField
     private String name;
 
 }
