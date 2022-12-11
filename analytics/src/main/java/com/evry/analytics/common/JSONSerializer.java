@@ -2,10 +2,9 @@ package com.evry.analytics.common;
 
 import com.evry.analytics.annotations.JSONField;
 import com.evry.analytics.annotations.JSONSerializable;
-import com.evry.analytics.common.exceptions.JSONSerializableException;
+import com.evry.analytics.annotations.exceptions.JSONSerializableException;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

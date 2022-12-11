@@ -2,22 +2,22 @@ package com.evry.analytics;
 
 import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.common.JSONSerializer;
-import com.evry.analytics.common.exceptions.JSONSerializableException;
+import com.evry.analytics.annotations.exceptions.JSONSerializableException;
 import com.evry.analytics.entity.User;
+import com.evry.analytics.restController.UserRestController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AnalyticsApplicationTests {
-
-	final JSONSerializer jsonSerializer = new JSONSerializer();
+class AnnotationsTest {
 
 	@Test
 	void testJSONSerializationExceptionThrowing() {
 		User user = new User();
 		user.setName("James Matthew");
-		user.setUserId(1L);
+		user.setId(1L);
 
 		UserDTO userDTO = new UserDTO(user);
 
@@ -34,7 +34,7 @@ class AnalyticsApplicationTests {
 	void testJSONSerialization() {
 		User user = new User();
 		user.setName("James Matthew");
-		user.setUserId(1L);
+		user.setId(1L);
 
 		UserDTO userDTO = new UserDTO(user);
 		;
@@ -47,4 +47,7 @@ class AnalyticsApplicationTests {
 		} catch (JSONSerializableException | IllegalAccessException exception) {
 		}
 	}
+
+	final JSONSerializer jsonSerializer = new JSONSerializer();
+
 }

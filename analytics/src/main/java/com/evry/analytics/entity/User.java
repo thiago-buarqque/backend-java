@@ -3,12 +3,13 @@ package com.evry.analytics.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -24,14 +25,16 @@ public class User {
 
         User user = (User) object;
 
-        return Objects.equals(userId, user.userId) &&
+        return Objects.equals(id, user.id) &&
                Objects.equals(name, user.name);
     }
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long userId;
+    private Long id;
 
     private String name;
+
+    private String phoneNumber;
 
 }

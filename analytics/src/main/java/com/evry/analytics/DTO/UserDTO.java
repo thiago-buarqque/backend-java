@@ -2,6 +2,7 @@ package com.evry.analytics.DTO;
 
 import com.evry.analytics.annotations.JSONField;
 import com.evry.analytics.annotations.JSONSerializable;
+import com.evry.analytics.annotations.PhoneNumber;
 import com.evry.analytics.entity.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,16 +11,17 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Getter
-@Setter
 @JSONSerializable
+@Setter
 public class UserDTO {
 
     public UserDTO() {
     }
 
     public UserDTO(User user) {
-        this.userId = user.getUserId();
+        this.id = user.getId();
         this.name = user.getName();
+        this.phoneNumber = user.getPhoneNumber();
     }
 
     @Override
@@ -30,15 +32,19 @@ public class UserDTO {
 
         UserDTO user = (UserDTO) object;
 
-        return Objects.equals(userId, user.userId) &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(name, user.name);
     }
 
     @JSONField
-    private long userId;
+    private long id;
 
     @NotBlank(message = "User name can not be empty.")
     @JSONField
     private String name;
+
+    @PhoneNumber(country = "Brazil")
+    @JSONField
+    private String phoneNumber;
 
 }
