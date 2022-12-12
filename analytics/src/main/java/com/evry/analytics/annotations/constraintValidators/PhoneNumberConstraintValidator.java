@@ -22,6 +22,10 @@ public class PhoneNumberConstraintValidator implements
         String mask =
                 countriesMask.getOrDefault(country, countriesMask.get("none"));
 
+        if(value.trim().equals("")) {
+            return false;
+        }
+
         return value.matches(mask);
     }
 

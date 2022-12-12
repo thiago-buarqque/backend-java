@@ -43,8 +43,8 @@ public class UserDTO {
     @JSONField
     private String name;
 
-    @PhoneNumber(country = "Brazil")
     @JSONField
+    @PhoneNumber(country = "Brazil")
     private String phoneNumber;
 
 }
