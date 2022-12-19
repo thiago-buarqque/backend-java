@@ -7,6 +7,7 @@ import com.evry.analytics.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
@@ -19,9 +20,10 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.phoneNumber = user.getPhoneNumber();
+        id = user.getId();
+        name = user.getName();
+        phoneNumber = user.getPhoneNumber();
+        arrayTest = user.getArrayTest();
     }
 
     @Override
@@ -46,5 +48,9 @@ public class UserDTO {
     @JSONField
     @PhoneNumber(country = "Brazil")
     private String phoneNumber;
+
+    @Transient
+    @JSONField
+    private String[] arrayTest;
 
 }

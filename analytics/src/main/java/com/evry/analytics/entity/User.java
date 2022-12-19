@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Getter
@@ -36,5 +37,9 @@ public class User {
     private String name;
 
     private String phoneNumber;
+
+    // Useless field to test @JSONSerializer
+    @Transient
+    private String[] arrayTest;
 
 }

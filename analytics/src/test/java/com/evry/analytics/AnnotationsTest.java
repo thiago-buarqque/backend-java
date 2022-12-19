@@ -13,41 +13,48 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class AnnotationsTest {
 
-	@Test
-	void testJSONSerializationExceptionThrowing() {
-		User user = new User();
-		user.setName("James Matthew");
-		user.setId(1L);
+    @Test
+    void testJSONSerializationExceptionThrowing() {
+        User user = new User();
+        user.setName("James Matthew");
+        user.setId(1L);
 
-		UserDTO userDTO = new UserDTO(user);
+        UserDTO userDTO = new UserDTO(user);
 
-		Assertions.assertDoesNotThrow(() -> {
-			jsonSerializer.convertToJSONString(userDTO);
-		});
+        Assertions.assertDoesNotThrow(() -> {
+            jsonSerializer.convertToJSONString(userDTO);
+        });
 
-		Assertions.assertThrows(JSONSerializableException.class, () -> {
-			jsonSerializer.convertToJSONString(user);
-		});
-	}
+        Assertions.assertThrows(
+            JSONSerializableException.class,
+            () -> jsonSerializer.convertToJSONString(user)
+        );
+    }
 
-	@Test
-	void testJSONSerialization() {
-		User user = new User();
-		user.setName("James Matthew");
-		user.setId(1L);
+    @Test
+    void testJSONSerialization() {
+        User user = new User();
+        user.setName("James Matthew");
+        user.setId(1L);
+        user.setArrayTest(new String[]{"Test1", "Test2"});
 
-		UserDTO userDTO = new UserDTO(user);
-		;
+        UserDTO userDTO = new UserDTO(user);
 
-		String expected = "\"name\":\"James Matthew\",\"userId\":1";
-		try {
-			Assertions.assertEquals(expected,
-				jsonSerializer.convertToJSONString(userDTO)
-			);
-		} catch (JSONSerializableException | IllegalAccessException exception) {
-		}
-	}
+        String expected = "{\n" +
+            "    \"phoneNumber\": null,\n" +
+            "    \"name\": \"James Matthew\",\n" +
+            "    \"arrayTest\": [\"Test1\", \"Test2\"],\n" +
+            "    \"id\": 1\n" +
+            "}";
 
-	final JSONSerializer jsonSerializer = new JSONSerializer();
+        try {
+            Assertions.assertEquals(expected,
+                jsonSerializer.convertToJSONString(userDTO)
+            );
+        } catch(JSONSerializableException | IllegalAccessException ignored) {
+        }
+    }
+
+    final JSONSerializer jsonSerializer = new JSONSerializer();
 
 }
