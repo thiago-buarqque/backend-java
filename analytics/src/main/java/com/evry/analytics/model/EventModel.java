@@ -1,28 +1,39 @@
 package com.evry.analytics.model;
 
-import com.evry.analytics.common.TimeRange;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.repository.EventRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 public class EventModel {
 
+    public EventModel(EventRepository eventRepository) {
+        _eventRepository = eventRepository;
+    }
+
     public Event addEvent(Event event) {
         return _eventRepository.save(event);
     }
 
-    public List<Event> getUserEvents(TimeRange timeRange, Long userid) {
+    public List<Event> getUserEvents(
+            LocalDateTime dateEnd, LocalDateTime dateStart, Long userid) {
+
+        if(dateEnd == null) {
+            dateEnd = LocalDateTime.now();
+        }
+
+        if(dateStart == null) {
+            dateStart = dateEnd.minusHours(24);
+        }
+
         return _eventRepository.findEventsByEventDateBetweenAndUserId(
-                timeRange.getDateStart(), timeRange.getDateEnd(), userid);
+                dateStart, dateEnd, userid);
     }
 
-    @Autowired
-    private EventRepository _eventRepository;
+    private final EventRepository _eventRepository;
 
 }

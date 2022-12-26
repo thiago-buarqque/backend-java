@@ -7,7 +7,7 @@ create table if not exists User (
 );
 create table if not exists Event (
     eventDate text,
-    eventId int,
+    eventId int not null auto_increment primary key,
     eventType text,
     metadata text,
     userId int

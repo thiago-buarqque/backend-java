@@ -13,8 +13,15 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface PhoneNumber {
+
+    boolean required() default false;
+
     String country() default "none";
-    Class<?>[] groups() default {}; // What is it for?
-    String message() default "Phone number is invalid";  // What is it for?
+
+    Class<?>[] groups() default {};
+
+    String message() default "Phone number is invalid";
+
     Class<? extends Payload>[] payload() default {};
+
 }

@@ -1,5 +1,6 @@
 package com.evry.analytics.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,22 +18,7 @@ import java.util.Objects;
 @Table
 public class Event {
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-
-        if (object == null || getClass() != object.getClass()) return false;
-
-        Event event = (Event) object;
-
-        return Objects.equals(eventId, event.eventId) &&
-                Objects.equals(eventType, event.eventType) &&
-                Objects.equals(metadata, event.metadata) &&
-                Objects.equals(eventDate, event.eventDate) &&
-                Objects.equals(userId, event.userId);
-    }
-
-    private Date eventDate;
+    private LocalDateTime eventDate;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -44,4 +29,5 @@ public class Event {
     private String metadata;
 
     private Long userId;
+
 }

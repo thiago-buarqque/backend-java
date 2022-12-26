@@ -4,10 +4,8 @@ import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.common.JSONSerializer;
 import com.evry.analytics.annotations.exceptions.JSONSerializableException;
 import com.evry.analytics.entity.User;
-import com.evry.analytics.restController.UserRestController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -22,12 +20,12 @@ class AnnotationsTest {
         UserDTO userDTO = new UserDTO(user);
 
         Assertions.assertDoesNotThrow(() -> {
-            jsonSerializer.convertToJSONString(userDTO);
+            _jsonSerializer.convertToJSONString(userDTO);
         });
 
         Assertions.assertThrows(
             JSONSerializableException.class,
-            () -> jsonSerializer.convertToJSONString(user)
+            () -> _jsonSerializer.convertToJSONString(user)
         );
     }
 
@@ -47,14 +45,13 @@ class AnnotationsTest {
             "    \"id\": 1\n" +
             "}";
 
-        try {
+        Assertions.assertDoesNotThrow(() ->
             Assertions.assertEquals(expected,
-                jsonSerializer.convertToJSONString(userDTO)
-            );
-        } catch(JSONSerializableException | IllegalAccessException ignored) {
-        }
+                _jsonSerializer.convertToJSONString(userDTO)
+            )
+        );
     }
 
-    final JSONSerializer jsonSerializer = new JSONSerializer();
+    private final JSONSerializer _jsonSerializer = new JSONSerializer();
 
 }

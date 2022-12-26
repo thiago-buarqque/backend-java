@@ -92,6 +92,8 @@ public class JSONSerializer {
     }
 
     private String getFieldFormattedName(Map.Entry<String, Object> entry) {
+        String DEFAULT_TAB_VALUE = "    ";
+
         return DEFAULT_TAB_VALUE + "\"" + entry.getKey() + "\": ";
     }
 
@@ -142,5 +144,4 @@ public class JSONSerializer {
         }
     }
 
-    private final String DEFAULT_TAB_VALUE = "    ";
 }

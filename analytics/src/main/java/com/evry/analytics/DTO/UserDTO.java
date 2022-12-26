@@ -4,13 +4,14 @@ import com.evry.analytics.annotations.JSONField;
 import com.evry.analytics.annotations.JSONSerializable;
 import com.evry.analytics.annotations.PhoneNumber;
 import com.evry.analytics.entity.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
-import java.util.Objects;
 
+@EqualsAndHashCode
 @Getter
 @JSONSerializable
 @Setter
@@ -26,18 +27,6 @@ public class UserDTO {
         arrayTest = user.getArrayTest();
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-
-        if (object == null || getClass() != object.getClass()) return false;
-
-        UserDTO user = (UserDTO) object;
-
-        return Objects.equals(id, user.id) &&
-                Objects.equals(name, user.name);
-    }
-
     @JSONField
     private long id;
 
@@ -46,7 +35,7 @@ public class UserDTO {
     private String name;
 
     @JSONField
-    @PhoneNumber(country = "Brazil")
+    @PhoneNumber(country = "Brazil", required = true)
     private String phoneNumber;
 
     @Transient

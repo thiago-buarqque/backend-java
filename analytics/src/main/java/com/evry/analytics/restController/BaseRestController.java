@@ -14,9 +14,9 @@ import java.util.Map;
 
 public abstract class BaseRestController {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException methodArgumentNotValidException) {
 
         BindingResult bindingResult =
@@ -26,14 +26,15 @@ public abstract class BaseRestController {
 
         Map<String, String> errors = new HashMap<>();
 
-        allErrors.forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
+        for (ObjectError objectError : allErrors) {
+            String fieldName = ((FieldError) objectError).getField();
 
-            String errorMessage = error.getDefaultMessage();
+            String errorMessage = objectError.getDefaultMessage();
 
             errors.put(fieldName, errorMessage);
-        });
+        }
 
         return errors;
     }
+
 }

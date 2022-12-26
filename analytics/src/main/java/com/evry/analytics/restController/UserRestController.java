@@ -6,7 +6,6 @@ import com.evry.analytics.model.UserModel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,12 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 @RestController
 public class UserRestController extends BaseRestController {
+
+    public UserRestController(ObjectMapper objectMapper, UserModel userModel) {
+        _objectMapper = objectMapper;
+        _userModel = userModel;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserDTO>
         registerUser(@Valid @RequestBody UserDTO userDTO) {
@@ -45,9 +50,6 @@ public class UserRestController extends BaseRestController {
         }
     }
 
-    @Autowired
-    UserModel _userModel;
-
-    @Autowired
     ObjectMapper _objectMapper;
+    UserModel _userModel;
 }
