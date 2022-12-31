@@ -1,8 +1,8 @@
 package com.evry.analytics.DTO;
 
-import com.evry.analytics.annotations.JSONField;
-import com.evry.analytics.annotations.JSONSerializable;
-import com.evry.analytics.annotations.PhoneNumber;
+import com.evry.analytics.annotation.JSONField;
+import com.evry.analytics.annotation.JSONSerializable;
+import com.evry.analytics.annotation.PhoneNumber;
 import com.evry.analytics.entity.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,6 +10,9 @@ import lombok.Setter;
 
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Getter
@@ -21,25 +24,57 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        id = user.getId();
-        name = user.getName();
-        phoneNumber = user.getPhoneNumber();
-        arrayTest = user.getArrayTest();
+        if(user != null) {
+            address = user.getAddress();
+            birthday = user.getBirthday();
+            createDate = user.getCreateDate();
+            email = user.getEmail();
+            firstName = user.getFirstName();
+            gender = user.getGender();
+            id = user.getId().toString();
+            lastName = user.getLastName();
+            middleName = user.getMiddleName();
+            phone = user.getPhone();
+        }
     }
 
     @JSONField
-    private long id;
-
-    @NotBlank(message = "User name can not be empty.")
-    @JSONField
-    private String name;
-
-    @JSONField
-    @PhoneNumber(country = "Brazil", required = true)
-    private String phoneNumber;
-
     @Transient
+    private String id;
+
     @JSONField
-    private String[] arrayTest;
+    private String address;
+
+    @JSONField
+    @NotNull(message = "User birthday must be provided.")
+    private LocalDate birthday;
+
+    @JSONField
+    private LocalDateTime createDate;
+
+    @JSONField
+    @NotBlank(message = "User e-mail must be provided.")
+    private String email;
+
+    @JSONField
+    @NotBlank(message = "User first name must be provided.")
+    private String firstName;
+
+    @JSONField
+    private String gender;
+
+    @JSONField
+    @NotBlank(message = "User last name must be provided.")
+    private String lastName;
+
+    @JSONField
+    private String middleName;
+
+    @NotBlank(message = "A password must be provided.")
+    private String password;
+
+    @JSONField
+    @PhoneNumber(country = "Brazil")
+    private String phone;
 
 }

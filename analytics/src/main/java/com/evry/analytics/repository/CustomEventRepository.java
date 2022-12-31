@@ -1,5 +1,5 @@
 package com.evry.analytics.repository;
 
 public interface CustomEventRepository {
-    public void deleteByUserId(Long userId);
+    public void deleteByUserId(String userId);
 }

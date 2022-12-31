@@ -33,7 +33,7 @@ public class EventRestController extends BaseRestController {
 
     @GetMapping("/{userId}")
     public List<EventDTO> fetchAllUserEvents(
-            @PathVariable Long userId, @RequestParam(required = false)
+            @PathVariable String userId, @RequestParam(required = false)
             LocalDateTime dateEnd, @RequestParam(required = false)
             LocalDateTime dateStart) {
 
@@ -46,8 +46,8 @@ public class EventRestController extends BaseRestController {
 
     @PostMapping("/register")
     public EventDTO registerEvent(@Valid @RequestBody EventDTO eventDTO) {
-        if (eventDTO.getEventDate() == null) {
-            eventDTO.setEventDate(LocalDateTime.now());
+        if (eventDTO.getDateTime() == null) {
+            eventDTO.setDateTime(LocalDateTime.now());
         }
 
         return _objectMapper.convertValue(

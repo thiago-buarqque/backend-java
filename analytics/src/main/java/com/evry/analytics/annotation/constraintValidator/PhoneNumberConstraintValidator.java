@@ -1,6 +1,6 @@
-package com.evry.analytics.annotations.constraintValidators;
+package com.evry.analytics.annotation.constraintValidator;
 
-import com.evry.analytics.annotations.PhoneNumber;
+import com.evry.analytics.annotation.PhoneNumber;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -22,6 +22,10 @@ public class PhoneNumberConstraintValidator implements
     public boolean isValid(String value, ConstraintValidatorContext context) {
         String mask =
                 countriesMask.getOrDefault(_country, countriesMask.get("none"));
+
+        if(value == null) {
+            return true;
+        }
 
         boolean empty = value.trim().equals("");
 

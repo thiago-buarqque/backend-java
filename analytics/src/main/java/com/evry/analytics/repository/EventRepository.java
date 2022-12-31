@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface EventRepository extends CustomEventRepository,
-        JpaRepository<Event, Long> {
+        JpaRepository<Event, UUID> {
 
-    List<Event> findEventsByEventDateBetweenAndUserId(
-            LocalDateTime date1, LocalDateTime date2, Long userId);
+    List<Event> findEventsByDateTimeBetweenAndVisitorId(
+            LocalDateTime date1, LocalDateTime date2, String userId);
 }

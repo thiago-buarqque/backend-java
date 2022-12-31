@@ -6,6 +6,9 @@ import com.evry.analytics.repository.UserRepository;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
 public class UserModel {
 
@@ -20,9 +23,13 @@ public class UserModel {
         return _userRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
+    public void deleteUser(String userId) {
         _eventRepository.deleteByUserId(userId);
-        _userRepository.deleteById(userId);
+        _userRepository.deleteById(UUID.fromString(userId));
+    }
+
+    public Optional<User> getUser(String userId) {
+        return _userRepository.findById(UUID.fromString(userId));
     }
 
     EventRepository _eventRepository;

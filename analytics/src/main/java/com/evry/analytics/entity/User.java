@@ -2,13 +2,17 @@ package com.evry.analytics.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,16 +20,38 @@ import javax.persistence.Transient;
 @Table
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String address;
+
+    @NotNull
+    private LocalDate birthday;
+
+    private LocalDateTime createDate;
+
+    @NotNull
+    private String email;
+
+    @NotNull
+    private String firstName;
+
+    private String gender;
+
+    @GeneratedValue
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Id
-    private Long id;
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID id;
 
-    private String name;
+    @NotNull
+    private String lastName;
 
-    private String phoneNumber;
+    private String middleName;
 
-    // Useless field to test @JSONSerializer
-    @Transient
-    private String[] arrayTest;
+    @NotNull
+    private String password;
+
+    private String phone;
 
 }

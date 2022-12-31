@@ -1,16 +1,20 @@
 package com.evry.analytics.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Getter
@@ -18,16 +22,51 @@ import java.time.LocalDateTime;
 @Table
 public class Event {
 
-    private LocalDateTime eventDate;
+    private String browserName;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    private String canonicalUrl;
+
+    private LocalDateTime createDate;
+
+    private LocalDateTime dateTime;
+
+    private String deviceType;
+
+    @GeneratedValue
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator",
+        parameters = {
+            @Parameter(
+                name = "uuid_gen_strategy_class",
+                value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+            )
+        }
+    )
     @Id
-    private Long eventId;
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID id;
 
-    private String eventType;
-
+    @NotNull
     private String metadata;
 
-    private Long userId;
+    private String pageTitle;
+
+    private String properties;
+
+    private String referrer;
+
+    @NotNull
+    private String sessionId;
+
+    @NotNull
+    private String timezoneOffset;
+
+    @NotNull
+    private String type;
+
+    @NotNull
+    private String visitorId;
 
 }

@@ -20,7 +20,7 @@ public class EventModel {
     }
 
     public List<Event> getUserEvents(
-            LocalDateTime dateEnd, LocalDateTime dateStart, Long userid) {
+            LocalDateTime dateEnd, LocalDateTime dateStart, String userid) {
 
         if(dateEnd == null) {
             dateEnd = LocalDateTime.now();
@@ -30,7 +30,7 @@ public class EventModel {
             dateStart = dateEnd.minusHours(24);
         }
 
-        return _eventRepository.findEventsByEventDateBetweenAndUserId(
+        return _eventRepository.findEventsByDateTimeBetweenAndVisitorId(
                 dateStart, dateEnd, userid);
     }
 

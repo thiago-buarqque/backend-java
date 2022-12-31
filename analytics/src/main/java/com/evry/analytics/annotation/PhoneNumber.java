@@ -1,6 +1,6 @@
-package com.evry.analytics.annotations;
+package com.evry.analytics.annotation;
 
-import com.evry.analytics.annotations.constraintValidators.PhoneNumberConstraintValidator;
+import com.evry.analytics.annotation.constraintValidator.PhoneNumberConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
