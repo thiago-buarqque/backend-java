@@ -2,11 +2,13 @@ package com.evry.analytics;
 
 import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.common.JSONSerializer;
-import com.evry.analytics.annotations.exceptions.JSONSerializableException;
+import com.evry.analytics.annotation.exception.JSONSerializableException;
 import com.evry.analytics.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.UUID;
 
 @SpringBootTest
 class AnnotationsTest {
@@ -14,8 +16,9 @@ class AnnotationsTest {
     @Test
     void testJSONSerializationExceptionThrowing() {
         User user = new User();
-        user.setName("James Matthew");
-        user.setId(1L);
+        user.setFirstName("James");
+        user.setLastName("Whatever");
+        user.setId(UUID.randomUUID());
 
         UserDTO userDTO = new UserDTO(user);
 
@@ -32,18 +35,24 @@ class AnnotationsTest {
     @Test
     void testJSONSerialization() {
         User user = new User();
-        user.setName("James Matthew");
-        user.setId(1L);
-        user.setArrayTest(new String[]{"Test1", "Test2"});
+        user.setFirstName("James");
+        user.setLastName("Whatever");
+        user.setId(UUID.fromString("351deb70-0247-476e-a740-ec2cd3bbc658"));
 
         UserDTO userDTO = new UserDTO(user);
 
         String expected = "{\n" +
-            "    \"phoneNumber\": null,\n" +
-            "    \"name\": \"James Matthew\",\n" +
-            "    \"arrayTest\": [\"Test1\", \"Test2\"],\n" +
-            "    \"id\": 1\n" +
-            "}";
+                "    \"birthday\": null,\n" +
+                "    \"firstName\": \"James\",\n" +
+                "    \"lastName\": \"Whatever\",\n" +
+                "    \"address\": null,\n" +
+                "    \"gender\": null,\n" +
+                "    \"phone\": null,\n" +
+                "    \"middleName\": null,\n" +
+                "    \"id\": \"351deb70-0247-476e-a740-ec2cd3bbc658\",\n" +
+                "    \"email\": null,\n" +
+                "    \"createDate\": null\n" +
+                "}";
 
         Assertions.assertDoesNotThrow(() ->
             Assertions.assertEquals(expected,
