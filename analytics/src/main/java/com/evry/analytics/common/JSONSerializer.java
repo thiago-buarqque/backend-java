@@ -22,28 +22,26 @@ public class JSONSerializer {
         return getJSONString(object);
     }
 
-    private void checkIfSerializable(Object object)
-            throws JSONSerializableException {
+    private void checkIfSerializable(Object object) throws JSONSerializableException {
 
-        if(Objects.isNull(object)) {
+        if (Objects.isNull(object)) {
             throw new JSONSerializableException("Object to serialize is null.");
         }
 
         Class<?> clazz = object.getClass();
 
-        if(!clazz.isAnnotationPresent(JSONSerializable.class)) {
+        if (!clazz.isAnnotationPresent(JSONSerializable.class)) {
             throw new JSONSerializableException("Object is not serializable.");
         }
     }
 
-    private String getJSONString(Object object)
-            throws IllegalAccessException {
+    private String getJSONString(Object object) throws IllegalAccessException {
 
         Class<?> clazz = object.getClass();
 
         Map<String, Object> jsonFields = new HashMap<>();
 
-        for(Field field : clazz.getDeclaredFields()) {
+        for (Field field : clazz.getDeclaredFields()) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(JSONField.class)) {
                 jsonFields.put(field.getName(), field.get(object));
@@ -54,35 +52,33 @@ public class JSONSerializer {
 
         Stream<Map.Entry<String, Object>> stream = entrySet.stream();
 
-        String jsonString = stream.map(
-                (entry) -> {
-                    try {
-                        return getField(
-                                getFieldFormattedName(entry),
-                                entry.getValue()
-                        );
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        ).collect(Collectors.joining(",\n"));
+        String jsonString =
+                stream.map(
+                                (entry) -> {
+                                    try {
+                                        return getField(
+                                                getFieldFormattedName(entry), entry.getValue());
+                                    } catch (IllegalAccessException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                })
+                        .collect(Collectors.joining(",\n"));
 
         return "{\n" + jsonString + "\n}";
     }
 
-    private String getField(
-            String fieldFormattedName, Object fieldValue)
-        throws IllegalAccessException {
+    private String getField(String fieldFormattedName, Object fieldValue)
+            throws IllegalAccessException {
 
-        if(fieldValue == null) {
+        if (fieldValue == null) {
             return fieldFormattedName + "null";
         }
 
         Class<?> clazz = fieldValue.getClass();
         String value;
-        if(clazz.isArray()) {
+        if (clazz.isArray()) {
             value = getArrayFieldValue(fieldValue);
-        } else if(fieldValue instanceof Collection) {
+        } else if (fieldValue instanceof Collection) {
             value = getCollectionFieldValue(fieldValue);
         } else {
             value = getFieldValue(fieldValue);
@@ -98,13 +94,13 @@ public class JSONSerializer {
     }
 
     private String getArrayFieldValue(Object object1) {
-        Object[] array = (Object[])object1;
+        Object[] array = (Object[]) object1;
 
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             stringBuilder.append(getFieldValue(array[i]));
 
-            if(i != array.length - 1) {
+            if (i != array.length - 1) {
                 stringBuilder.append(", ");
             }
         }
@@ -113,14 +109,14 @@ public class JSONSerializer {
     }
 
     private String getCollectionFieldValue(Object object1) {
-        Collection<Object> collection = (Collection<Object>)object1;
+        Collection<Object> collection = (Collection<Object>) object1;
 
         StringBuilder stringBuilder = new StringBuilder();
         int i = 0;
         for (Object object2 : collection) {
             stringBuilder.append(getFieldValue(object2));
 
-            if(i != collection.size() - 1) {
+            if (i != collection.size() - 1) {
                 stringBuilder.append(", ");
             }
             i++;
@@ -130,12 +126,12 @@ public class JSONSerializer {
     }
 
     private String getFieldValue(Object object) {
-        if(object instanceof String || object instanceof Character) {
+        if (object instanceof String || object instanceof Character) {
             return "\"" + object + "\"";
         }
 
         try {
-            Character c = (Character)object;
+            Character c = (Character) object;
 
             return "\"" + c + "\"";
         } catch (Exception exception) {
@@ -143,5 +139,4 @@ public class JSONSerializer {
             return object.toString();
         }
     }
-
 }

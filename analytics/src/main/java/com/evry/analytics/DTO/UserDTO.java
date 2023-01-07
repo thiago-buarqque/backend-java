@@ -4,15 +4,17 @@ import com.evry.analytics.annotation.JSONField;
 import com.evry.analytics.annotation.JSONSerializable;
 import com.evry.analytics.annotation.PhoneNumber;
 import com.evry.analytics.entity.User;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Getter
@@ -20,11 +22,10 @@ import java.time.LocalDateTime;
 @Setter
 public class UserDTO {
 
-    public UserDTO() {
-    }
+    public UserDTO() {}
 
     public UserDTO(User user) {
-        if(user != null) {
+        if (user != null) {
             address = user.getAddress();
             birthday = user.getBirthday();
             createDate = user.getCreateDate();
@@ -38,19 +39,15 @@ public class UserDTO {
         }
     }
 
-    @JSONField
-    @Transient
-    private String id;
+    @JSONField @Transient private String id;
 
-    @JSONField
-    private String address;
+    @JSONField private String address;
 
     @JSONField
     @NotNull(message = "User birthday must be provided.")
     private LocalDate birthday;
 
-    @JSONField
-    private LocalDateTime createDate;
+    @JSONField private LocalDateTime createDate;
 
     @JSONField
     @NotBlank(message = "User e-mail must be provided.")
@@ -60,15 +57,13 @@ public class UserDTO {
     @NotBlank(message = "User first name must be provided.")
     private String firstName;
 
-    @JSONField
-    private String gender;
+    @JSONField private String gender;
 
     @JSONField
     @NotBlank(message = "User last name must be provided.")
     private String lastName;
 
-    @JSONField
-    private String middleName;
+    @JSONField private String middleName;
 
     @NotBlank(message = "A password must be provided.")
     private String password;
@@ -76,5 +71,4 @@ public class UserDTO {
     @JSONField
     @PhoneNumber(country = "Brazil")
     private String phone;
-
 }

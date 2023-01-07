@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +19,7 @@ public abstract class BaseRestController {
     public Map<String, String> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException methodArgumentNotValidException) {
 
-        BindingResult bindingResult =
-                methodArgumentNotValidException.getBindingResult();
+        BindingResult bindingResult = methodArgumentNotValidException.getBindingResult();
 
         List<ObjectError> allErrors = bindingResult.getAllErrors();
 
@@ -36,5 +35,4 @@ public abstract class BaseRestController {
 
         return errors;
     }
-
 }

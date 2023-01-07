@@ -3,7 +3,6 @@ package com.evry.analytics.restController;
 import com.evry.analytics.DTO.UserDTO;
 import com.evry.analytics.entity.User;
 import com.evry.analytics.model.UserModel;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 @RequestMapping("/user")
 @RestController
@@ -29,37 +29,29 @@ public class UserRestController extends BaseRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO>
-        registerUser(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO) {
 
-        return ResponseEntity.ok(new UserDTO(_userModel.addUser(
-                _objectMapper.convertValue(userDTO, User.class)))
-        );
+        return ResponseEntity.ok(
+                new UserDTO(_userModel.addUser(_objectMapper.convertValue(userDTO, User.class))));
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String userId) {
         Optional<User> userOptional = _userModel.getUser(userId);
 
-        return userOptional.map(
-                user -> new ResponseEntity<>(new UserDTO(user),
-                HttpStatus.OK)
-        ).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-
+        return userOptional
+                .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/{userId}/delete")
     public ResponseEntity<String> deleteUser(@PathVariable String userId) {
-        try{
+        try {
             _userModel.deleteUser(userId);
 
-            return new ResponseEntity<>("User removed successfully.",
-                    HttpStatus.OK);
-        } catch (
-                EmptyResultDataAccessException emptyResultDataAccessException
-        ) {
-            return new ResponseEntity<>("User not found.",
-                    HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("User removed successfully.", HttpStatus.OK);
+        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+            return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
         }
     }
 

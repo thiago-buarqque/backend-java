@@ -22,18 +22,16 @@ public class EventModel {
     public List<Event> getUserEvents(
             LocalDateTime dateEnd, LocalDateTime dateStart, String userid) {
 
-        if(dateEnd == null) {
+        if (dateEnd == null) {
             dateEnd = LocalDateTime.now();
         }
 
-        if(dateStart == null) {
+        if (dateStart == null) {
             dateStart = dateEnd.minusHours(24);
         }
 
-        return _eventRepository.findEventsByDateTimeBetweenAndVisitorId(
-                dateStart, dateEnd, userid);
+        return _eventRepository.findEventsByDateTimeBetweenAndVisitorId(dateStart, dateEnd, userid);
     }
 
     private final EventRepository _eventRepository;
-
 }

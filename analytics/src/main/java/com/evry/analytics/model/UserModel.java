@@ -12,8 +12,7 @@ import java.util.UUID;
 @Component
 public class UserModel {
 
-    public UserModel(
-            EventRepository eventRepository, UserRepository userRepository) {
+    public UserModel(EventRepository eventRepository, UserRepository userRepository) {
 
         _eventRepository = eventRepository;
         _userRepository = userRepository;
@@ -34,5 +33,4 @@ public class UserModel {
 
     EventRepository _eventRepository;
     UserRepository _userRepository;
-
 }

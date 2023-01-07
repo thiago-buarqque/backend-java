@@ -2,12 +2,13 @@ package com.evry.analytics.annotation;
 
 import com.evry.analytics.annotation.constraintValidator.PhoneNumberConstraintValidator;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
 
 @Constraint(validatedBy = PhoneNumberConstraintValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
@@ -23,5 +24,4 @@ public @interface PhoneNumber {
     String message() default "Phone number is invalid";
 
     Class<? extends Payload>[] payload() default {};
-
 }

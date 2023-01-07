@@ -2,6 +2,7 @@ package com.evry.analytics.model;
 
 import com.evry.analytics.entity.Visitor;
 import com.evry.analytics.repository.VisitorRepository;
+
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class VisitorModel {
     }
 
     public Visitor addVisitor(Visitor visitor) {
-        if(visitor.getCreateDate() == null) {
+        if (visitor.getCreateDate() == null) {
             visitor.setCreateDate(LocalDateTime.now());
         }
 
@@ -28,5 +29,4 @@ public class VisitorModel {
     }
 
     private final VisitorRepository visitorRepository;
-
 }

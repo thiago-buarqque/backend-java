@@ -8,9 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Getter
@@ -18,8 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 public class EventDTO {
 
-    public EventDTO() {
-    }
+    public EventDTO() {}
 
     public EventDTO(Event event) {
         browserName = event.getBrowserName();
@@ -38,52 +38,35 @@ public class EventDTO {
         visitorId = event.getVisitorId();
     }
 
-    @JSONField
-    private String browserName;
+    @JSONField private String browserName;
 
-    @JSONField
-    @NotNull
-    private String canonicalUrl;
+    @JSONField @NotNull private String canonicalUrl;
 
-    @JSONField
-    private LocalDateTime createDate;
+    @JSONField private LocalDateTime createDate;
 
-    @JSONField
-    private LocalDateTime dateTime;
+    @JSONField private LocalDateTime dateTime;
 
-    @JSONField
-    private String deviceType;
+    @JSONField private String deviceType;
 
-    @JSONField
-    private String id;
+    @JSONField private String id;
 
     @JSONField
     @NotEmpty(message = "Metadata must be provided.")
     private String metadata;
 
-    @JSONField
-    private String pageTitle;
+    @JSONField private String pageTitle;
 
-    @JSONField
-    private String properties;
+    @JSONField private String properties;
 
-    @JSONField
-    private String referrer;
+    @JSONField private String referrer;
 
-    @JSONField
-    @NotNull
-    private String sessionId;
+    @JSONField @NotNull private String sessionId;
 
-    @JSONField
-    @NotNull
-    private String timezoneOffset;
+    @JSONField @NotNull private String timezoneOffset;
 
     @JSONField
     @NotEmpty(message = "Event type must be provided.")
     private String type;
 
-    @JSONField
-    @NotNull
-    private String visitorId;
-
+    @JSONField @NotNull private String visitorId;
 }
