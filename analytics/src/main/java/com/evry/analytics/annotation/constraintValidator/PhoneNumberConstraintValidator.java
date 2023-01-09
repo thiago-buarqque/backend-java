@@ -14,13 +14,13 @@ public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone
     public void initialize(PhoneNumber constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
 
-        _country = constraintAnnotation.country();
-        _required = constraintAnnotation.required();
+        country = constraintAnnotation.country();
+        required = constraintAnnotation.required();
     }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        String mask = countriesMask.getOrDefault(_country, countriesMask.get("none"));
+        String mask = countriesMask.getOrDefault(country, countriesMask.get("none"));
 
         if (value == null) {
             return true;
@@ -30,7 +30,7 @@ public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone
 
         boolean valid = value.matches(mask);
 
-        if (_required) {
+        if (required) {
             return !empty && valid;
         }
 
@@ -41,7 +41,7 @@ public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone
         return valid;
     }
 
-    private String _country;
+    private String country;
 
     private final Map<String, String> countriesMask =
             new HashMap<String, String>() {
@@ -52,5 +52,5 @@ public class PhoneNumberConstraintValidator implements ConstraintValidator<Phone
                 }
             };
 
-    private boolean _required;
+    private boolean required;
 }

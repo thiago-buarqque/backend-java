@@ -12,11 +12,11 @@ import java.util.List;
 public class EventModel {
 
     public EventModel(EventRepository eventRepository) {
-        _eventRepository = eventRepository;
+        this.eventRepository = eventRepository;
     }
 
     public Event addEvent(Event event) {
-        return _eventRepository.save(event);
+        return eventRepository.save(event);
     }
 
     public List<Event> getUserEvents(
@@ -30,8 +30,8 @@ public class EventModel {
             dateStart = dateEnd.minusHours(24);
         }
 
-        return _eventRepository.findEventsByDateTimeBetweenAndVisitorId(dateStart, dateEnd, userid);
+        return eventRepository.findEventsByDateTimeBetweenAndVisitorId(dateStart, dateEnd, userid);
     }
 
-    private final EventRepository _eventRepository;
+    private final EventRepository eventRepository;
 }

@@ -14,23 +14,27 @@ public class UserModel {
 
     public UserModel(EventRepository eventRepository, UserRepository userRepository) {
 
-        _eventRepository = eventRepository;
-        _userRepository = userRepository;
+        this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     public User addUser(User user) {
-        return _userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    private static UUID getUUIDFromString(String userId) {
+        return UUID.fromString(userId);
     }
 
     public void deleteUser(String userId) {
-        _eventRepository.deleteByUserId(userId);
-        _userRepository.deleteById(UUID.fromString(userId));
+        eventRepository.deleteByUserId(userId);
+        userRepository.deleteById(getUUIDFromString(userId));
     }
 
     public Optional<User> getUser(String userId) {
-        return _userRepository.findById(UUID.fromString(userId));
+        return userRepository.findById(getUUIDFromString(userId));
     }
 
-    EventRepository _eventRepository;
-    UserRepository _userRepository;
+    EventRepository eventRepository;
+    UserRepository userRepository;
 }

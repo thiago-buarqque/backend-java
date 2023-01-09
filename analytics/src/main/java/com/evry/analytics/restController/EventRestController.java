@@ -24,9 +24,8 @@ import javax.validation.Valid;
 public class EventRestController extends BaseRestController {
 
     public EventRestController(EventModel eventModel, ObjectMapper objectMapper) {
-
-        _eventModel = eventModel;
-        _objectMapper = objectMapper;
+        this.eventModel = eventModel;
+        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/{userId}")
@@ -35,7 +34,7 @@ public class EventRestController extends BaseRestController {
             @RequestParam(required = false) LocalDateTime dateEnd,
             @RequestParam(required = false) LocalDateTime dateStart) {
 
-        List<Event> events = _eventModel.getUserEvents(dateEnd, dateStart, userId);
+        List<Event> events = eventModel.getUserEvents(dateEnd, dateStart, userId);
 
         return events.stream().map(EventDTO::new).collect(Collectors.toList());
     }
@@ -46,11 +45,11 @@ public class EventRestController extends BaseRestController {
             eventDTO.setDateTime(LocalDateTime.now());
         }
 
-        return _objectMapper.convertValue(
-                _eventModel.addEvent(_objectMapper.convertValue(eventDTO, Event.class)),
+        return objectMapper.convertValue(
+                eventModel.addEvent(objectMapper.convertValue(eventDTO, Event.class)),
                 EventDTO.class);
     }
 
-    private final EventModel _eventModel;
-    private final ObjectMapper _objectMapper;
+    private final EventModel eventModel;
+    private final ObjectMapper objectMapper;
 }

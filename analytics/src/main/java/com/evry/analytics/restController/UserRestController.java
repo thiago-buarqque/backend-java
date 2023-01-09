@@ -24,20 +24,20 @@ import javax.validation.Valid;
 public class UserRestController extends BaseRestController {
 
     public UserRestController(ObjectMapper objectMapper, UserModel userModel) {
-        _objectMapper = objectMapper;
-        _userModel = userModel;
+        this.objectMapper = objectMapper;
+        this.userModel = userModel;
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registerUser(@Valid @RequestBody UserDTO userDTO) {
 
         return ResponseEntity.ok(
-                new UserDTO(_userModel.addUser(_objectMapper.convertValue(userDTO, User.class))));
+                new UserDTO(userModel.addUser(objectMapper.convertValue(userDTO, User.class))));
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String userId) {
-        Optional<User> userOptional = _userModel.getUser(userId);
+        Optional<User> userOptional = userModel.getUser(userId);
 
         return userOptional
                 .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
@@ -47,7 +47,7 @@ public class UserRestController extends BaseRestController {
     @PostMapping("/{userId}/delete")
     public ResponseEntity<String> deleteUser(@PathVariable String userId) {
         try {
-            _userModel.deleteUser(userId);
+            userModel.deleteUser(userId);
 
             return new ResponseEntity<>("User removed successfully.", HttpStatus.OK);
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
@@ -55,6 +55,6 @@ public class UserRestController extends BaseRestController {
         }
     }
 
-    ObjectMapper _objectMapper;
-    UserModel _userModel;
+    ObjectMapper objectMapper;
+    UserModel userModel;
 }
