@@ -17,30 +17,16 @@ public class TimeRangeUtil {
 
         LocalDateTime yesterdayLocalDateTimeAtMax = getYesterdayLocalDateTimeAtMax();
         LocalDateTime startDate = yesterdayLocalDateTimeAtMax.minusDays(timeRange.getValue());
-        startDate = getAtDayMin(startDate);
+        startDate = DateUtil.getAtDayMin(startDate);
 
         return field.between(
                 DSL.localDateTime(startDate), DSL.localDateTime(yesterdayLocalDateTimeAtMax));
     }
 
-    public LocalDateTime getAtDayMax(LocalDateTime localDateTime) {
-        localDateTime = localDateTime.withHour(23);
-        localDateTime = localDateTime.withMinute(59);
-        localDateTime = localDateTime.withSecond(59);
-
-        return localDateTime.withNano(999);
-    }
-
-    public LocalDateTime getAtDayMin(LocalDateTime localDateTime) {
-        localDateTime = localDateTime.withHour(0);
-        localDateTime = localDateTime.withMinute(0);
-        localDateTime = localDateTime.withSecond(0);
-        return localDateTime.withNano(0);
-    }
-
     private LocalDateTime getYesterdayLocalDateTimeAtMax() {
-        LocalDateTime endDate = LocalDateTime.now().minusDays(1);
-        return getAtDayMax(endDate);
+        LocalDateTime endDate = LocalDateTime.now();
+
+        return DateUtil.getAtDayMax(endDate.minusDays(1));
     }
 
     private Condition getLast24HoursRange(Field<LocalDateTime> field) {
