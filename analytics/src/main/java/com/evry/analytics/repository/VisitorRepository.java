@@ -3,7 +3,14 @@ package com.evry.analytics.repository;
 import com.evry.analytics.entity.Visitor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface VisitorRepository extends JpaRepository<Visitor, UUID> {}
+import javax.transaction.Transactional;
+
+@Repository
+@Transactional
+public interface VisitorRepository extends JpaRepository<Visitor, UUID> {
+    public void deleteByUserId(String userId);
+}

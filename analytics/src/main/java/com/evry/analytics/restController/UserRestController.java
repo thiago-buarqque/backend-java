@@ -50,7 +50,7 @@ public class UserRestController extends BaseRestController {
             userModel.deleteUser(userId);
 
             return new ResponseEntity<>("User removed successfully.", HttpStatus.OK);
-        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+        } catch (EmptyResultDataAccessException | IllegalArgumentException runtimeException) {
             return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
         }
     }
