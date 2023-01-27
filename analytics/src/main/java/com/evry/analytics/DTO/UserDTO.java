@@ -39,7 +39,7 @@ public class UserDTO {
         }
     }
 
-    @JSONField @Transient private String id;
+    @JSONField private String id;
 
     @JSONField private String address;
 
