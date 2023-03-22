@@ -20,8 +20,10 @@ public class BNFTokenLeaf extends BNFToken {
             Token token = lexicalAnalyzer.getNextToken();
 
             if (getTag() != token.getTag()) {
-                throw new SyntaxErrorException(getTag(),
-                        token.getColumnStart(), token.getLine(), token.getTag());
+                throw new SyntaxErrorException(
+                        getTag(), token.getColumnStart(), token.getLine(),
+                        token.getTag()
+                );
             }
             System.out.println(getName() + " " + token.getValue());
             lexicalAnalyzer.removeLastSavedPosition();

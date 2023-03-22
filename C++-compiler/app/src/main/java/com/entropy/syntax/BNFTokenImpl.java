@@ -19,14 +19,13 @@ public class BNFTokenImpl extends BNFToken {
     public void validate() throws Exception {
         lexicalAnalyzer.saveCurrentPosition();
 
-        testFirstToken();
+        validateFirstToken();
 
         for (BNFToken bnfToken : tokens) {
             try {
                 bnfToken.validate();
             } catch (BNFTokenOptional.BNFTokenOptionalException ignored) {
-            }
-            catch (Exception exception) {
+            } catch (Exception exception) {
                 lexicalAnalyzer.returnToLastSavedPosition();
                 throw exception;
             }
@@ -35,7 +34,7 @@ public class BNFTokenImpl extends BNFToken {
         lexicalAnalyzer.removeLastSavedPosition();
     }
 
-    protected void testFirstToken() throws Exception {
+    protected void validateFirstToken() throws Exception {
         Token currentToken = getCurrentToken();
         Tag currentTokenTag = currentToken.getTag();
 
@@ -58,11 +57,4 @@ public class BNFTokenImpl extends BNFToken {
         tokens.add(bnfToken);
     }
 
-    public void removeToken(BNFToken bnfToken) {
-        tokens.remove(bnfToken);
-    }
-
-    public String getTokenName() {
-        return _tokenName;
-    }
 }

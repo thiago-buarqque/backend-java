@@ -27,7 +27,7 @@ public abstract class BNFToken {
 
     public abstract List<Tag> getFirstTokenTag();
 
-    public Token getCurrentToken() throws Exception {
+    public Token getCurrentToken() {
         return lexicalAnalyzer.getCurrentToken();
     }
 

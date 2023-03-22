@@ -18,20 +18,24 @@ public class BNFTokenOptionalGroup extends BNFTokenImpl {
 
         Token currentToken = getCurrentToken();
 
-        if(getFirstTokenTag().contains(currentToken.getTag())) {
+        List<Tag> firstTokenTag1 = getFirstTokenTag();
+        if(firstTokenTag1.contains(currentToken.getTag())) {
             for (int i = 0; i < tokens.size(); i++) {
                 BNFToken bnfToken1 = tokens.get(i);
 
-                if(!bnfToken1.getFirstTokenTag().contains(currentToken.getTag())) {
+                List<Tag> firstTokenTag2 = bnfToken1.getFirstTokenTag();
+                if(!firstTokenTag2.contains(currentToken.getTag())) {
                     continue;
                 }
                 try {
                     bnfToken1.validate();
+
                     lexicalAnalyzer.removeLastSavedPosition();
+
                     return;
                 }
                 catch (SyntaxErrorException syntaxErrorException) {
-                    if(_throwError(currentToken, i)) {
+                    if(_currentTokenDoesNotMatchAny(currentToken, i)) {
                         throw syntaxErrorException;
                     }
                 }
@@ -41,10 +45,11 @@ public class BNFTokenOptionalGroup extends BNFTokenImpl {
         }
 
         lexicalAnalyzer.returnToLastSavedPosition();
+
         throw new Exception("Expected one of these tokens " + tokens);
     }
 
-    private boolean _throwError(Token currentToken, int i) {
+    private boolean _currentTokenDoesNotMatchAny(Token currentToken, int i) {
         for(int j = i; j < tokens.size(); j++) {
             BNFToken bnfToken2 = tokens.get(j);
             if (bnfToken2.getFirstTokenTag().contains(

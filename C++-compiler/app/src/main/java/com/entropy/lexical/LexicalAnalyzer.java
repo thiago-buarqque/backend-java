@@ -3,7 +3,7 @@ package com.entropy.lexical;
 import com.entropy.common.FileWalker;
 import com.entropy.common.Tag;
 import com.entropy.common.Token;
-import com.entropy.exceptions.DefaultException;
+import com.entropy.exceptions.DefaultCompilerException;
 import com.entropy.exceptions.UnexpectedCharacterException;
 import com.entropy.exceptions.UnexpectedEOFException;
 
@@ -14,9 +14,9 @@ import java.util.Stack;
 public class LexicalAnalyzer {
     private final Stack<Integer> _backupColumnPosition;
     private Token _currentToken;
-    private FileWalker _filewalker;
+    private final FileWalker _filewalker;
     private static LexicalAnalyzer _lexicalAnalyzer;
-    private List<Token> _tokens;
+    private final List<Token> _tokens;
     private int _tokenIndex = 0;
 
     private LexicalAnalyzer() throws Exception {
@@ -168,9 +168,9 @@ public class LexicalAnalyzer {
         }
 
         if (character.equals('.')) {
-            throw new DefaultException("Floating numbers are not allowed",
-                    _filewalker.getCurrentLine(),
-                    _filewalker.getCurrentColumn());
+            throw new DefaultCompilerException("Floating numbers are not allowed",
+                                               _filewalker.getCurrentLine(),
+                                               _filewalker.getCurrentColumn());
         }
 
         _filewalker.goBackOneChar();

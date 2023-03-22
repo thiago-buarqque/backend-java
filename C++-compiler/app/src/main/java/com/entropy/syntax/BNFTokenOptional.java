@@ -28,7 +28,7 @@ public class BNFTokenOptional extends BNFTokenImpl {
         while (n > 0) {
             lexicalAnalyzer.saveCurrentPosition();
             try {
-                testFirstToken();
+                validateFirstToken();
             } catch (Exception exception) {
                 lexicalAnalyzer.removeLastSavedPosition();
                 throw new BNFTokenOptionalException();

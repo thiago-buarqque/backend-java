@@ -24,7 +24,7 @@ int main() {
         if (_pedido == 1 && idade >= 18) {
             cout << "Informe a quantidade: ";
             cin >> quantidade;
-            cout << "Você pediu " << quantidade << " cerveja(s)";
+            cout << "Você pediu " << quantidade << " cerveja(s)"
             compras[position] = "Cerveja";
             quantidades[position] = quantidade;
             precos[position] = quantidade * precoCerveja;
