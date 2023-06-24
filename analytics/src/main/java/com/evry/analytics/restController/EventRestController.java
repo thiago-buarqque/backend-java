@@ -2,7 +2,7 @@ package com.evry.analytics.restController;
 
 import com.evry.analytics.DTO.EventDTO;
 import com.evry.analytics.entity.Event;
-import com.evry.analytics.model.EventModel;
+import com.evry.analytics.service.EventService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,18 +23,18 @@ import javax.validation.Valid;
 @RestController
 public class EventRestController extends BaseRestController {
 
-    public EventRestController(EventModel eventModel, ObjectMapper objectMapper) {
-        this.eventModel = eventModel;
+    public EventRestController(EventService eventService, ObjectMapper objectMapper) {
+        this.eventService = eventService;
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{visitorId}")
     public List<EventDTO> fetchAllUserEvents(
-            @PathVariable String userId,
+            @PathVariable String visitorId,
             @RequestParam(required = false) LocalDateTime dateEnd,
             @RequestParam(required = false) LocalDateTime dateStart) {
 
-        List<Event> events = eventModel.getUserEvents(dateEnd, dateStart, userId);
+        List<Event> events = eventService.getVisitorEvents(dateEnd, dateStart, visitorId);
 
         return events.stream().map(EventDTO::new).collect(Collectors.toList());
     }
@@ -46,10 +46,10 @@ public class EventRestController extends BaseRestController {
         }
 
         return objectMapper.convertValue(
-                eventModel.addEvent(objectMapper.convertValue(eventDTO, Event.class)),
+                eventService.addEvent(objectMapper.convertValue(eventDTO, Event.class)),
                 EventDTO.class);
     }
 
-    private final EventModel eventModel;
+    private final EventService eventService;
     private final ObjectMapper objectMapper;
 }

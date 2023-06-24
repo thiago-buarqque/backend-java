@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS User (
     lastName TEXT NOT NULL,
     middleName TEXT,
     password TEXT NOT NULL,
-    phone VARCHAR(50)
+    phone VARCHAR(50),
+    role TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Visitor (

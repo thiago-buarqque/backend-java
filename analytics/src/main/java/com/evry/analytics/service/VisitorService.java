@@ -1,4 +1,4 @@
-package com.evry.analytics.model;
+package com.evry.analytics.service;
 
 import com.evry.analytics.entity.Visitor;
 import com.evry.analytics.repository.VisitorRepository;
@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
-public class VisitorModel {
+public class VisitorService {
 
-    public VisitorModel(VisitorRepository visitorRepository) {
+    public VisitorService(VisitorRepository visitorRepository) {
         this.visitorRepository = visitorRepository;
     }
 
@@ -25,7 +24,7 @@ public class VisitorModel {
     }
 
     public Optional<Visitor> getVisitorById(String id) {
-        return visitorRepository.findById(UUID.fromString(id));
+        return visitorRepository.findById(id);
     }
 
     private final VisitorRepository visitorRepository;

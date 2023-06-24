@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface EventRepository extends CustomEventRepository, JpaRepository<Event, UUID> {
 
     List<Event> findEventsByDateTimeBetweenAndVisitorId(
-            LocalDateTime date1, LocalDateTime date2, String userId);
+            LocalDateTime date1, LocalDateTime date2, String visitorId);
 }

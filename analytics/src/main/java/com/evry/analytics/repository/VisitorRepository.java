@@ -11,6 +11,6 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface VisitorRepository extends JpaRepository<Visitor, UUID> {
+public interface VisitorRepository extends JpaRepository<Visitor, String> {
     public void deleteByUserId(String userId);
 }

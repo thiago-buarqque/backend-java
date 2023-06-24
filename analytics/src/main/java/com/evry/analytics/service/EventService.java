@@ -1,4 +1,4 @@
-package com.evry.analytics.model;
+package com.evry.analytics.service;
 
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.repository.EventRepository;
@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class EventModel {
+public class EventService {
 
-    public EventModel(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
@@ -19,8 +19,8 @@ public class EventModel {
         return eventRepository.save(event);
     }
 
-    public List<Event> getUserEvents(
-            LocalDateTime dateEnd, LocalDateTime dateStart, String userid) {
+    public List<Event> getVisitorEvents(
+            LocalDateTime dateEnd, LocalDateTime dateStart, String visitorId) {
 
         if (dateEnd == null) {
             dateEnd = LocalDateTime.now();
@@ -30,7 +30,7 @@ public class EventModel {
             dateStart = dateEnd.minusHours(24);
         }
 
-        return eventRepository.findEventsByDateTimeBetweenAndVisitorId(dateStart, dateEnd, userid);
+        return eventRepository.findEventsByDateTimeBetweenAndVisitorId(dateStart, dateEnd, visitorId);
     }
 
     private final EventRepository eventRepository;
