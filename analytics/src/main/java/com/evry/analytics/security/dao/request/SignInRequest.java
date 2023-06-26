@@ -1,4 +1,4 @@
-package com.evry.analytics.service.security.dao.request;
+package com.evry.analytics.security.dao.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

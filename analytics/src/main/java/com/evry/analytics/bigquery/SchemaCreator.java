@@ -26,8 +26,8 @@ public class SchemaCreator {
 
         this.bigQuery = bigqueryHelper.getOptions().getService();
 
-        this.createSchema();
-        this.createTables();
+//        this.createSchema();
+//        this.createTables();
     }
 
     void createSchema() {

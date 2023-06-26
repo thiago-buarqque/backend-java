@@ -1,10 +1,12 @@
-package com.evry.analytics.restController;
+package com.evry.analytics.controller;
 
 import com.evry.analytics.DTO.VisitorDTO;
 import com.evry.analytics.entity.Visitor;
 import com.evry.analytics.service.VisitorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +21,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 @RequestMapping("/visitor")
+@AllArgsConstructor
 @RestController
-public class VisitorRestController extends BaseRestController {
-
-    public VisitorRestController(ObjectMapper objectMapper, VisitorService visitorService) {
-
-        this.objectMapper = objectMapper;
-        this.visitorService = visitorService;
-    }
+public class VisitorController extends BaseController {
 
     @PostMapping
     public VisitorDTO addVisitor(@Valid @RequestBody VisitorDTO visitorDTO) {

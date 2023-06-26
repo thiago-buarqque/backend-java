@@ -4,44 +4,37 @@ import com.evry.analytics.annotation.JSONField;
 import com.evry.analytics.annotation.JSONSerializable;
 import com.evry.analytics.annotation.PhoneNumber;
 import com.evry.analytics.entity.User;
-
 import com.evry.analytics.service.enums.UserRole;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Getter
 @JSONSerializable
 @Setter
-public class UserDTO {
+public class SignUpUserDTO {
 
-    public UserDTO() {}
+    public SignUpUserDTO() {}
 
-    public UserDTO(User user) {
+    public SignUpUserDTO(User user) {
         if (user != null) {
             address = user.getAddress();
             birthday = user.getBirthday();
             email = user.getEmail();
             firstName = user.getFirstName();
             gender = user.getGender();
-            id = user.getId().toString();
             lastName = user.getLastName();
             middleName = user.getMiddleName();
             phone = user.getPhone();
             role = user.getRole();
         }
     }
-
-    @JSONField private String id;
 
     @JSONField private String address;
 
@@ -64,6 +57,9 @@ public class UserDTO {
     private String lastName;
 
     @JSONField private String middleName;
+
+    @NotBlank(message = "A password must be provided.")
+    private String password;
 
     @JSONField
     @PhoneNumber(country = "Brazil")

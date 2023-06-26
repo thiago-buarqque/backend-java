@@ -1,4 +1,4 @@
-package com.evry.analytics.restController;
+package com.evry.analytics.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseRestController {
+public abstract class BaseController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

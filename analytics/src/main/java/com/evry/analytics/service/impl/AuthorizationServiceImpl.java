@@ -2,34 +2,26 @@ package com.evry.analytics.service.impl;
 
 import com.evry.analytics.entity.User;
 import com.evry.analytics.repository.UserRepository;
-import com.evry.analytics.repository.VisitorRepository;
 
 import com.evry.analytics.security.exception.SecurityException;
 import com.evry.analytics.service.AuthorizationService;
 import com.evry.analytics.service.enums.UserRole;
 import com.evry.analytics.service.security.JwtService;
-import com.evry.analytics.service.security.dao.response.JwtAuthenticationResponse;
+import com.evry.analytics.security.dao.response.JwtAuthenticationResponse;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Component
+@AllArgsConstructor
+@Service
 public class AuthorizationServiceImpl implements AuthorizationService {
-
-    public AuthorizationServiceImpl(
-            AuthenticationManager authenticationManager, JwtService jwtService,
-            PasswordEncoder passwordEncoder, UserRepository userRepository,
-            VisitorRepository visitorRepository) {
-
-        this.authenticationManager = authenticationManager;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-    }
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
@@ -41,7 +33,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
 
             if(user.getRole() == null) {
-                user.setRole(UserRole.ROLE_DEFAULT);
+                user.setRole(UserRole.ROLE_DEFAULT.getName());
             }
 
             userRepository.save(user);

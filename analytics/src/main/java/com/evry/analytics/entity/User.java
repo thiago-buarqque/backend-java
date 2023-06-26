@@ -54,11 +54,11 @@ public class User implements UserDetails {
 
     private String phone;
 
-    private UserRole role;
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority((role.name())));
+        return Collections.singleton(new SimpleGrantedAuthority((role)));
     }
 
     @Override

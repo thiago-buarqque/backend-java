@@ -1,7 +1,7 @@
 package com.evry.analytics.service;
 
 import com.evry.analytics.entity.User;
-import com.evry.analytics.service.security.dao.response.JwtAuthenticationResponse;
+import com.evry.analytics.security.dao.response.JwtAuthenticationResponse;
 
 public interface AuthorizationService {
     JwtAuthenticationResponse signup(User user);

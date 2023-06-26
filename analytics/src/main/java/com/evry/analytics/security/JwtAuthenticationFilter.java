@@ -2,6 +2,8 @@ package com.evry.analytics.security;
 
 import com.evry.analytics.service.UserService;
 import com.evry.analytics.service.security.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserService userService;
@@ -31,6 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             @NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
+
         String authorization = request.getHeader("Authorization");
 
         if(StringUtils.isEmpty(authorization) || !StringUtils.startsWith(authorization, "Bearer ")){
@@ -38,28 +41,50 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String jwt = authorization.substring(7);
-        String userEmail = jwtService.extractUserName(jwt);
+        try {
+            String jwt = authorization.substring(7);
 
-        if(StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetailsService userDetailsService = userService.userDetailsService();
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+            String userEmail = jwtService.extractUserName(jwt);
 
-            if(jwtService.isTokenValid(jwt, userDetails)) {
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails, null, userDetails.getAuthorities()
-                        );
+            if(StringUtils.isNotEmpty(userEmail) &&
+                    SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                context.setAuthentication(authenticationToken);
-
-                SecurityContextHolder.setContext(context);
+                setContextAuthentication(request, jwt, userEmail, userService,
+                                         jwtService);
             }
+
+            filterChain.doFilter(request, response);
+        } catch (ExpiredJwtException expiredJwtException) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("{\"message\": \"Your token is expired.\"}");
+//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Your token is expired");
         }
 
-        filterChain.doFilter(request, response);
+    }
+
+    private static void setContextAuthentication(
+            HttpServletRequest request, String jwt, String userEmail,
+            UserService userService, JwtService jwtService) {
+
+        UserDetailsService userDetailsService = userService.userDetailsService();
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(
+                userEmail);
+
+        if(jwtService.isTokenValid(jwt, userDetails)) {
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities()
+                    );
+
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(
+                    request));
+
+            context.setAuthentication(authenticationToken);
+
+            SecurityContextHolder.setContext(context);
+        }
     }
 }

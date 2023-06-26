@@ -2,16 +2,14 @@ package com.evry.analytics.repository.impl;
 
 import com.evry.analytics.repository.CustomEventRepository;
 
+import lombok.AllArgsConstructor;
 import org.jooq.DSLContext;
 import org.jooq.Record1;
 import org.jooq.SelectConditionStep;
 import org.jooq.impl.DSL;
 
+@AllArgsConstructor
 public class EventRepositoryImpl implements CustomEventRepository {
-
-    public EventRepositoryImpl(DSLContext dslContext) {
-        this.dslContext = dslContext;
-    }
 
     @Override
     public void deleteByUserId(String userId) {

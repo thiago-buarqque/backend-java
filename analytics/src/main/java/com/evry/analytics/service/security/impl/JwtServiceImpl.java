@@ -19,6 +19,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
+
     @Value("${token.signing.key}")
     private String jwtSigningKey;
 
@@ -33,7 +34,7 @@ public class JwtServiceImpl implements JwtService {
                 .setClaims(new HashMap<>())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + ONE_HOUR))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
@@ -64,4 +65,6 @@ public class JwtServiceImpl implements JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+    private final long ONE_HOUR = 1000 * 60 * 60;
 }

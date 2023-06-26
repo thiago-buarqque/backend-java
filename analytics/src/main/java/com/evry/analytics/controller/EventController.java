@@ -1,10 +1,13 @@
-package com.evry.analytics.restController;
+package com.evry.analytics.controller;
 
 import com.evry.analytics.DTO.EventDTO;
 import com.evry.analytics.entity.Event;
 import com.evry.analytics.service.EventService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,15 +23,12 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 @RequestMapping("/event")
+@AllArgsConstructor
 @RestController
-public class EventRestController extends BaseRestController {
-
-    public EventRestController(EventService eventService, ObjectMapper objectMapper) {
-        this.eventService = eventService;
-        this.objectMapper = objectMapper;
-    }
+public class EventController extends BaseController {
 
     @GetMapping("/{visitorId}")
+    @Secured({"ROLE_ADMIN"})
     public List<EventDTO> fetchAllUserEvents(
             @PathVariable String visitorId,
             @RequestParam(required = false) LocalDateTime dateEnd,
