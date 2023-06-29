@@ -1,4 +1,4 @@
-package com.evry.analytics.annotation.exception;
+package com.evry.analytics.model.annotation.exception;
 
 public class JSONSerializableException extends Throwable {
 

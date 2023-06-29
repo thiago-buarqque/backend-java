@@ -1,10 +1,9 @@
 package com.evry.analytics.DTO;
 
-import com.evry.analytics.annotation.JSONField;
-import com.evry.analytics.annotation.JSONSerializable;
-import com.evry.analytics.annotation.PhoneNumber;
-import com.evry.analytics.entity.User;
-import com.evry.analytics.service.enums.UserRole;
+import com.evry.analytics.model.annotation.JSONField;
+import com.evry.analytics.model.annotation.JSONSerializable;
+import com.evry.analytics.model.annotation.PhoneNumber;
+import com.evry.analytics.model.entity.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @Getter

@@ -1,5 +1,6 @@
-package com.evry.analytics.security;
+package com.evry.analytics.config;
 
+import com.evry.analytics.security.JwtAuthenticationFilter;
 import com.evry.analytics.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,16 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
 
+    // Configura e define a cadeia de filtros de segurança
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider()).addFilterBefore(
-                        jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests().antMatchers("/v1/auth/**")
-                        .permitAll().anyRequest().authenticated();
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests()
+                .antMatchers("/v1/auth/**").permitAll()
+                .anyRequest().authenticated();
 
         return http.build();
     }
@@ -42,7 +45,10 @@ public class SecurityConfiguration {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
+        // Define o serviço que a ser utilizado para encontrar o usuário
+        // para a autenticação.
         authProvider.setUserDetailsService(userService.userDetailsService());
+        // Classe responsável por criptografar a senha do usuário.
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;

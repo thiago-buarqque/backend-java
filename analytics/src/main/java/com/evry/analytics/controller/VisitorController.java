@@ -1,12 +1,11 @@
 package com.evry.analytics.controller;
 
 import com.evry.analytics.DTO.VisitorDTO;
-import com.evry.analytics.entity.Visitor;
-import com.evry.analytics.service.VisitorService;
+import com.evry.analytics.model.entity.Visitor;
+import com.evry.analytics.service.impl.VisitorServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,5 +41,5 @@ public class VisitorController extends BaseController {
     }
 
     private final ObjectMapper objectMapper;
-    private final VisitorService visitorService;
+    private final VisitorServiceImpl visitorService;
 }

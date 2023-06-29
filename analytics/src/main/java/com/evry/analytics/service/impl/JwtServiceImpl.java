@@ -1,6 +1,6 @@
-package com.evry.analytics.service.security.impl;
+package com.evry.analytics.service.impl;
 
-import com.evry.analytics.service.security.JwtService;
+import com.evry.analytics.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;

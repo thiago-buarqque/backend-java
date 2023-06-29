@@ -1,4 +1,4 @@
-package com.evry.analytics.annotation;
+package com.evry.analytics.model.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

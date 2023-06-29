@@ -1,4 +1,4 @@
-package com.evry.analytics.service.security;
+package com.evry.analytics.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

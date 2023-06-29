@@ -1,4 +1,4 @@
-package com.evry.analytics.service.enums;
+package com.evry.analytics.model.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

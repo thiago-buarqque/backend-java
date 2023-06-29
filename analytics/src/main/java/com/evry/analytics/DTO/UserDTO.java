@@ -1,20 +1,16 @@
 package com.evry.analytics.DTO;
 
-import com.evry.analytics.annotation.JSONField;
-import com.evry.analytics.annotation.JSONSerializable;
-import com.evry.analytics.annotation.PhoneNumber;
-import com.evry.analytics.entity.User;
+import com.evry.analytics.model.annotation.JSONField;
+import com.evry.analytics.model.annotation.JSONSerializable;
+import com.evry.analytics.model.annotation.PhoneNumber;
+import com.evry.analytics.model.entity.User;
 
-import com.evry.analytics.service.enums.UserRole;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

@@ -1,6 +1,6 @@
 package com.evry.analytics.repository;
 
-import com.evry.analytics.entity.Event;
+import com.evry.analytics.model.entity.Event;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,11 +1,10 @@
 package com.evry.analytics.controller;
 
 import com.evry.analytics.DTO.UserDTO;
-import com.evry.analytics.entity.User;
+import com.evry.analytics.model.entity.User;
 import com.evry.analytics.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

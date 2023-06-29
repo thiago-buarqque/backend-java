@@ -1,4 +1,4 @@
-package com.evry.analytics.entity;
+package com.evry.analytics.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

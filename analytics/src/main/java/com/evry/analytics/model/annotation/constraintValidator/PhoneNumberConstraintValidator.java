@@ -1,6 +1,6 @@
-package com.evry.analytics.annotation.constraintValidator;
+package com.evry.analytics.model.annotation.constraintValidator;
 
-import com.evry.analytics.annotation.PhoneNumber;
+import com.evry.analytics.model.annotation.PhoneNumber;
 
 import java.util.HashMap;
 import java.util.Map;

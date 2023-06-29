@@ -1,8 +1,8 @@
 package com.evry.analytics.common;
 
-import com.evry.analytics.annotation.JSONField;
-import com.evry.analytics.annotation.JSONSerializable;
-import com.evry.analytics.annotation.exception.JSONSerializableException;
+import com.evry.analytics.model.annotation.JSONField;
+import com.evry.analytics.model.annotation.JSONSerializable;
+import com.evry.analytics.model.annotation.exception.JSONSerializableException;
 
 import java.lang.reflect.Field;
 import java.util.Collection;

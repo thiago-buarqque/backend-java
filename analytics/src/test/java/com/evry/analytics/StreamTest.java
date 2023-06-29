@@ -1,6 +1,6 @@
 package com.evry.analytics;
 
-import com.evry.analytics.entity.User;
+import com.evry.analytics.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

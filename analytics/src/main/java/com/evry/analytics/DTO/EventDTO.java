@@ -1,8 +1,8 @@
 package com.evry.analytics.DTO;
 
-import com.evry.analytics.annotation.JSONField;
-import com.evry.analytics.annotation.JSONSerializable;
-import com.evry.analytics.entity.Event;
+import com.evry.analytics.model.annotation.JSONField;
+import com.evry.analytics.model.annotation.JSONSerializable;
+import com.evry.analytics.model.entity.Event;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

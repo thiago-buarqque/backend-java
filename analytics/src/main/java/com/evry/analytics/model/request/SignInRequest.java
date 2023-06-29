@@ -1,12 +1,12 @@
-package com.evry.analytics.security.dao.request;
+package com.evry.analytics.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class SignInRequest {
     private String email;
     private String password;

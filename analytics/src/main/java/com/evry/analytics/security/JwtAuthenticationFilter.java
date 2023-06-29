@@ -1,10 +1,9 @@
 package com.evry.analytics.security;
 
 import com.evry.analytics.service.UserService;
-import com.evry.analytics.service.security.JwtService;
+import com.evry.analytics.service.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
@@ -57,7 +56,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException expiredJwtException) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("{\"message\": \"Your token is expired.\"}");
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Your token is expired");
         }
 
     }

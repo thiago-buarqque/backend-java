@@ -1,6 +1,5 @@
-package com.evry.analytics.entity;
+package com.evry.analytics.model.entity;
 
-import com.evry.analytics.service.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 

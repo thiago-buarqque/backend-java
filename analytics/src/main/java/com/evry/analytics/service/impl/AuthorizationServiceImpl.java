@@ -1,20 +1,18 @@
 package com.evry.analytics.service.impl;
 
-import com.evry.analytics.entity.User;
+import com.evry.analytics.model.entity.User;
 import com.evry.analytics.repository.UserRepository;
 
 import com.evry.analytics.security.exception.SecurityException;
 import com.evry.analytics.service.AuthorizationService;
-import com.evry.analytics.service.enums.UserRole;
-import com.evry.analytics.service.security.JwtService;
-import com.evry.analytics.security.dao.response.JwtAuthenticationResponse;
+import com.evry.analytics.model.enums.UserRole;
+import com.evry.analytics.service.JwtService;
+import com.evry.analytics.model.response.JwtAuthenticationResponse;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

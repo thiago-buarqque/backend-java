@@ -1,9 +1,9 @@
 package com.evry.analytics;
 
 import com.evry.analytics.DTO.UserDTO;
-import com.evry.analytics.annotation.exception.JSONSerializableException;
+import com.evry.analytics.model.annotation.exception.JSONSerializableException;
 import com.evry.analytics.common.JSONSerializer;
-import com.evry.analytics.entity.User;
+import com.evry.analytics.model.entity.User;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

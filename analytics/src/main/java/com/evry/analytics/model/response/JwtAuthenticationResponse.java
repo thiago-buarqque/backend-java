@@ -1,11 +1,11 @@
-package com.evry.analytics.security.dao.response;
+package com.evry.analytics.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class JwtAuthenticationResponse {
     private String token;

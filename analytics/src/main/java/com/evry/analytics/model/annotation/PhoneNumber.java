@@ -1,6 +1,6 @@
-package com.evry.analytics.annotation;
+package com.evry.analytics.model.annotation;
 
-import com.evry.analytics.annotation.constraintValidator.PhoneNumberConstraintValidator;
+import com.evry.analytics.model.annotation.constraintValidator.PhoneNumberConstraintValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
